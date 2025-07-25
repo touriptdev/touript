@@ -1,34 +1,56 @@
 import {
-  Appointment01Icon,
-  UserMultiple03Icon,
-  CheckListIcon,
   User02Icon,
-  Message01Icon,
 } from "@hugeicons/core-free-icons";
+import { useEffect, useRef, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import ButtonWithBorder from "./buttons/buttonWithBorder.components";
 import IconButton from "./buttons/iconButton.components";
-import { Link, useLocation } from "react-router-dom";
 import TabBarButton from "./buttons/tabBarButton.components";
-import { useEffect, useRef, useState } from "react";
 import { navItems } from "../utils/navItems";
+import { tabItems } from "../utils/tabItems";
 
 function HeaderLarge() {
   const location = useLocation();
-  const navRefs = useRef([]);
+  const desktopNavRefs = useRef([]);
+  const mobileTabRefs = useRef([]);
+
   const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0 });
+  const [mobileIndicatorStyle, setMobileIndicatorStyle] = useState({
+    left: 0,
+    width: 0,
+  });
 
   useEffect(() => {
-    const activeIndex = navItems.findIndex(
-      (item) => location.pathname === item.link
-    );
+    const updateIndicator = () => {
+      const desktopIndex = navItems.findIndex(
+        (item) => location.pathname === item.link
+      );
+      const desktopEl = desktopNavRefs.current[desktopIndex];
+      if (desktopEl) {
+        setIndicatorStyle({
+          left: desktopEl.offsetLeft,
+          width: desktopEl.offsetWidth,
+        });
+      }
 
-    const current = navRefs.current[activeIndex];
-    if (current) {
-      setIndicatorStyle({
-        left: current.offsetLeft,
-        width: current.offsetWidth,
+      // Mobile tab underline
+      const mobileIndex = tabItems.findIndex((item) => {
+        // handle dynamic routes like /profile/:id
+        const basePath = location.pathname.split("/")[1];
+        return item.link === `/${basePath}` || location.pathname === item.link;
       });
-    }
+      const mobileEl = mobileTabRefs.current[mobileIndex];
+      if (mobileEl) {
+        setMobileIndicatorStyle({
+          left: mobileEl.offsetLeft,
+          width: mobileEl.offsetWidth,
+        });
+      }
+    };
+
+    updateIndicator();
+    // const timer = setTimeout(updateIndicator, 10);
+    // return () => clearTimeout(timer);
   }, [location.pathname]);
 
   return (
@@ -43,54 +65,19 @@ function HeaderLarge() {
         </Link>
 
         {/* Nav Bar */}
-        {/* <div className="flex items-center gap-8 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2  font-poppins text-base text-gray-700 h-14">
-          <ButtonWithBorder
-            iconName={Appointment01Icon}
-            iconText="Book Now"
-            iconLink="/"
-            useNavLink={true}
-          />
 
-          <ButtonWithBorder
-            iconName={UserMultiple03Icon}
-            iconText="Far Fable"
-            iconLink="/farfable"
-            useNavLink={true}
-          />
-          <ButtonWithBorder
-            iconName={CheckListIcon}
-            iconText="My Booking"
-            iconLink="/mybooking"
-            useNavLink={true}
-          />
-        </div> */}
-        <div className="relative flex items-center gap-8 font-poppins text-base font-medium text-gray-700 h-14">
+        <div className="absolute flex items-center gap-8  left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 font-poppins text-base font-medium text-gray-700 h-14">
           {/* Animated Underline */}
           <div
-            className="absolute bottom-0 h-0.5  bg-emerald-500 transition-all duration-300 ease-in-out"
+            className="absolute bottom-0 h-0.5 bg-emerald-500 transition-all duration-300 ease-in-out"
             style={{ ...indicatorStyle }}
           />
-
-          {/* {navItems.map((item, idx) => (
-            <div
-              key={item.link}
-              ref={(el) => (navRefs.current[idx] = el)}
-              className="relative"
-            >
-              <ButtonWithBorder
-                iconText={item.text}
-                iconName={item.icon}
-                iconLink={item.link}
-                useNavLink={true}
-              />
-            </div>
-          ))} */}
 
           {navItems.map((item, idx) => (
             <div
               key={item.link}
               ref={(el) => {
-                if (el) navRefs.current[idx] = el;
+                if (el) desktopNavRefs.current[idx] = el;
               }}
               className="relative"
             >
@@ -121,32 +108,31 @@ function HeaderLarge() {
         </div>
       </div>
 
-      <div className="lg:hidden fixed bottom-0 flex items-center justify-evenly  w-full  shadow-[0_-1px_0px_rgba(0,0,0,0.05)] bg-white z-50">
-        <TabBarButton
-          iconName={Appointment01Icon}
-          iconText="Book Now"
-          iconLink="/"
+      <div className="lg:hidden fixed bottom-0 flex items-center justify-evenly w-full shadow-[0_-1px_0px_rgba(0,0,0,0.05)] bg-white z-50">
+        {/* Mobile Animated Indicator */}
+        <div
+          className="absolute top-0 h-0.5 bg-emerald-500 transition-all duration-300 ease-in-out"
+          style={{
+            left: mobileIndicatorStyle.left || 0,
+            width: mobileIndicatorStyle.width || 0,
+          }}
         />
-        <TabBarButton
-          iconName={UserMultiple03Icon}
-          iconText="Far Fable"
-          iconLink="/farfable"
-        />
-        <TabBarButton
-          iconName={CheckListIcon}
-          iconText="My Booking"
-          iconLink="/mybooking"
-        />
-        <TabBarButton
-          iconName={Message01Icon}
-          iconText="Firesight"
-          iconLink="/firesight"
-        />
-        <TabBarButton
-          iconName={User02Icon}
-          iconText="Profile"
-          iconLink="/profile/:id"
-        />
+
+        {tabItems.map((item, idx) => (
+          <div
+            key={item.link}
+            ref={(el) => {
+              if (el) mobileTabRefs.current[idx] = el;
+            }}
+            className="relative"
+          >
+            <TabBarButton
+              iconText={item.text}
+              iconName={item.icon}
+              iconLink={item.link}
+            />
+          </div>
+        ))}
       </div>
     </div>
   );

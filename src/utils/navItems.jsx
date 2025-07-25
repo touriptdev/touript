@@ -2,8 +2,6 @@ import {
   Appointment01Icon,
   UserMultiple03Icon,
   CheckListIcon,
-  User02Icon,
-  Message01Icon,
 } from "@hugeicons/core-free-icons";
 
 export const navItems = [

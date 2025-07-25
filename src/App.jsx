@@ -14,8 +14,10 @@ import FarFable from "./pages/farFable.pages";
 import FireSight from "./pages/firesight.pages";
 import Profile from "./pages/profile.pages";
 import Settings from "./pages/settings.pages";
+import Notification from "./pages/notification.pages";
 import SignIn from "./pages/signin.pages";
 import SignUp from "./pages/signup.pages";
+
 
 export default function AppRoutes() {
   return (
@@ -58,6 +60,14 @@ export default function AppRoutes() {
           element={
             <Layout>
               <FireSight />
+            </Layout>
+          }
+        />
+        <Route
+          path="/notification"
+          element={
+            <Layout>
+              <Notification />
             </Layout>
           }
         />

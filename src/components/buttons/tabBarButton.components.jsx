@@ -3,11 +3,11 @@ import { NavLink } from "react-router-dom";
 
 export default function TabBarButton({ iconName, iconText, iconLink }) {
   const baseClass =
-    "flex flex-col items-center justify-center h-full py-2 gap-2 border-t-2 transition-all delay-150 duration-300 font-poppins";
+    "flex flex-col items-center justify-center h-full py-2 gap-2 transition-all delay-150 duration-300 font-poppins";
 
-  const activeClass = "text-emerald-500 border-emerald-500 ";
+  const activeClass = "text-emerald-500 ";
   const inactiveClass =
-    "text-gray-500  border-transparent hover:text-emerald-500 hover:border-emerald-500";
+    "text-gray-500   hover:text-emerald-500 ";
   return (
     <NavLink
       to={iconLink}
