@@ -4,3 +4,9 @@
 @theme{
     --font-poppins: Poppins, "sans-serif";
 }
+
+
+
+*, ::before, ::after {
+  box-sizing: border-box;
+}

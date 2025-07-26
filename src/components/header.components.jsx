@@ -1,18 +1,18 @@
-import {
-  User02Icon,
-} from "@hugeicons/core-free-icons";
+import { User02Icon } from "@hugeicons/core-free-icons";
 import { useEffect, useRef, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import ButtonWithBorder from "./buttons/buttonWithBorder.components";
 import IconButton from "./buttons/iconButton.components";
 import TabBarButton from "./buttons/tabBarButton.components";
 import { navItems } from "../utils/navItems";
 import { tabItems } from "../utils/tabItems";
+import { HugeiconsIcon } from "@hugeicons/react";
 
 function HeaderLarge() {
   const location = useLocation();
   const desktopNavRefs = useRef([]);
   const mobileTabRefs = useRef([]);
+  const navigate = useNavigate();
 
   const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0 });
   const [mobileIndicatorStyle, setMobileIndicatorStyle] = useState({
@@ -91,20 +91,39 @@ function HeaderLarge() {
           ))}
         </div>
 
-        <div className="flex items-center justify-end gap-8 font-poppins text-base font-medium text-gray-700 h-14">
+        <div className="flex items-center justify-end gap-4 font-poppins text-base font-medium text-gray-700 h-14">
           {/* Create Account [Sign Up] */}
-          <ButtonWithBorder iconText="Create Account" iconLink="/signup" />
+
+          <button
+            onClick={() =>
+              navigate("/signup", {
+                state: { backgroundLocation: location },
+              })
+            }
+            className="flex items-center text-sm h-full py-4 px-4 rounded-lg border-1 border-gray-200 bg-gray-50 font-medium font-poppins text-gray-500 hover:text-emerald-500 hover:border-transparent cursor-pointer hover:bg-white hover:shadow-xl hover:shadow-gray-200 transition-all duration-300 delay-150"
+          >
+            <span>Create Account</span>
+          </button>
+
           {/* Person Image Area [Login]*/}
-          <div className="w-14 h-14 bg-transparent border-2 border-gray-200 rounded-full flex items-center justify-center">
-            <IconButton
-              buttonSize={12}
-              iconSize={24}
-              iconName={User02Icon}
-              bgColor="bg-gray-200"
-              iconColor="text-gray-700"
-              iconLink="/signin"
-            />
-          </div>
+          <button className="w-14 h-14 bg-transparent border-2 border-gray-200 rounded-full flex items-center justify-center cursor-pointer"
+          onClick={() =>
+              navigate("/signin", {
+                state: { backgroundLocation: location },
+              })
+            }
+          >
+            <div
+              className={`w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center w-12 h-12`}
+            >
+              <HugeiconsIcon
+                icon={User02Icon}
+                size={24}
+                className="text-gray-700"
+                strokeWidth={2}
+              />
+            </div>
+          </button>
         </div>
       </div>
 
