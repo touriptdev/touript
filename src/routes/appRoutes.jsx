@@ -16,6 +16,7 @@ import Settings from "../pages/settings.pages";
 import Notification from "../pages/notification.pages";
 import SignIn from "../pages/signin.pages";
 import SignUp from "../pages/signup.pages";
+import VerificationCode from "../pages/verification.pages";
 
 export default function AppRoutes() {
   const location = useLocation();
@@ -111,6 +112,14 @@ export default function AppRoutes() {
             element={
               <ResponsiveModal>
                 <SignIn />
+              </ResponsiveModal>
+            }
+          />
+          <Route
+            path="/verificationCode"
+            element={
+              <ResponsiveModal>
+                <VerificationCode />
               </ResponsiveModal>
             }
           />
