@@ -1,4 +1,5 @@
 import React, { forwardRef } from "react";
+import AirportForm from "../components/airport";
 
 const Menu0 = forwardRef((props, ref) => {
   return (
@@ -6,9 +7,7 @@ const Menu0 = forwardRef((props, ref) => {
       <span className="text-xl">What to do</span>
       <div className="flex items-center justify-between gap-8">
         <div>
-          <label>
-            <input name="myInput" placeholder="Enter Name" />
-          </label>
+          <AirportForm/>
           <label>
             <input name="myInput" placeholder="Enter Email" />
           </label>

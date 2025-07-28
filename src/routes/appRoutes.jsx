@@ -1,11 +1,13 @@
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-  useLocation,
-} from "react-router-dom";
-import { Layout, ResponsiveModal } from "../layouts";
+/*
+    Author: Gulam Choudhury
+    Moderator:
+    Last Update: July 27, 2025
+    Tricky: 
+    Description: Create all the App router here. BackgroundLocation help you navigate the previous routing. Use the loggedin or other measure to secure the paths. Most of the element can be found in page folder but the layout is in layout folder. 
+*/
+
+import { Routes, Route, Navigate } from "react-router-dom";
+import { Layout } from "../layouts";
 import BookNow from "../pages/bookNow.pages";
 import Flights from "../pages/flights.pages";
 import FlightDetails from "../pages/flightDetails.pages";
@@ -14,14 +16,8 @@ import FireSight from "../pages/firesight.pages";
 import Profile from "../pages/profile.pages";
 import Settings from "../pages/settings.pages";
 import Notification from "../pages/notification.pages";
-import SignIn from "../pages/signin.pages";
-import SignUp from "../pages/signup.pages";
-import VerificationCode from "../utils/verification.section";
 
-export default function AppRoutes() {
-  const location = useLocation();
-  const backgroundLocation = location.state?.backgroundLocation ?? location;
-
+export default function AppRoutes({ backgroundLocation }) {
   return (
     <>
       <Routes location={backgroundLocation}>
@@ -100,29 +96,6 @@ export default function AppRoutes() {
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
 
-      {/* Modal overlays */}
-      { backgroundLocation && location !== backgroundLocation && (
-        <Routes>
-          <Route
-            exact
-            path="/signin"
-            element={
-              <ResponsiveModal>
-                <SignIn />
-              </ResponsiveModal>
-            }
-          />
-          <Route
-            exact
-            path="/signup"
-            element={
-              <ResponsiveModal>
-                <SignUp />
-              </ResponsiveModal>
-            }
-          />
-        </Routes>
-      )}
     </>
   );
 }

@@ -423,6 +423,8 @@ export default function BookNow() {
             <HugeiconsIcon icon={Search01Icon} size={24} strokeWidth={2} className="text-white" />
           </div>
         </button>
+
+
       </div>
     </div>
   );

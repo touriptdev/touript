@@ -69,7 +69,7 @@ export default function SignUpSection({
 
       {/* Social*/}
       <div className="flex flex-col items-center justify-center font-poppins text-center text-gray-900 gap-2 pb-8 w-full font-poppins font-medium">
-        <button className="w-full h-14 flex items-center justify-bewteen px-4 bg-gray-50 border-1 border-gray-200 rounded-lg cursor-pointer transition-all duration-300 delay-150 hover:bg-white hover:shadow-lg hover:border-transparent">
+        <button className="w-full h-14 flex items-center justify-bewteen px-4 bg-gray-50 border-1 border-gray-200 rounded-lg cursor-pointer transition-all duration-300 delay-150 hover:bg-white hover:shadow-lg shadow-gray-200 hover:border-transparent">
           <div className="w-6 h-6 flex items-center justify-center">
             <img
               src="/images/google.png"
@@ -82,7 +82,7 @@ export default function SignUpSection({
           </span>
         </button>
 
-        <button className="w-full h-14 flex items-center justify-bewteen px-4 bg-gray-50 border-1 border-gray-200 rounded-lg cursor-pointer transition-all duration-300 delay-150 hover:bg-white hover:shadow-lg hover:border-transparent">
+        <button className="w-full h-14 flex items-center justify-bewteen px-4 bg-gray-50 border-1 border-gray-200 rounded-lg cursor-pointer transition-all duration-300 delay-150 hover:bg-white hover:shadow-lg shadow-gray-200 hover:border-transparent">
           <div className="w-6 h-6 flex items-center justify-center">
             <img
               src="/images/facebook.png"

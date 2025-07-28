@@ -1,15 +1,19 @@
-import {
-  BrowserRouter as Router,
-} from "react-router-dom";
-import AppRoutes from "./routes/appRoutes";
+/* 
+  
+  Author: Gulam Choudhury
+  Moderator: 
+  Last Updated: 26 July, 2025
+  Description: Holds the 
+  
+  */
 
+import { BrowserRouter as Router } from "react-router-dom";
+import { RootRouter } from "./routes";
 
 export default function App() {
   return (
     <Router>
-      <AppRoutes />
+      <RootRouter />
     </Router>
-
   );
 }
-

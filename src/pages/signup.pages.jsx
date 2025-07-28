@@ -17,11 +17,12 @@ export default function SignUp() {
   const [username, setUsername] = useState("");
   const [gender, setGender] = useState("");
 
+
   const handleSignUpForm = () => {
-    if (!email || !password || !confirmPassword) {
-      alert("All fields are required");
-      return;
-    }
+    // if (!email || !password || !confirmPassword) {
+    //   alert("All fields are required");
+    //   return;
+    // }
     // if (password !== confirmPassword) {
     //   alert("Passwords do not match");
     //   return;
@@ -35,11 +36,17 @@ export default function SignUp() {
     setStep(3);
   };
 
+  const handleAccountSetup = () => {
+    console.log("Form submitted:", { firstname, lastname, username, gender });
+    setStep(4);
+  };
+
   const goBack = () => setStep((prev) => prev - 1);
 
   return (
     <div className="flex flex-col items-center justify-center w-full">
       <main className="flex items-center justify-center w-full">
+        
         {step === 1 && (
           <SignUpSection
             email={email}
@@ -67,9 +74,11 @@ export default function SignUp() {
             setLastname={setLastname}
             setGender={setGender}
             onBack={goBack}
-            onNext={handleVerification}
+            onNext={handleAccountSetup}
           />
         )}
+
+
       </main>
     </div>
   );
