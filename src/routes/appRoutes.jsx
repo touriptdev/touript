@@ -16,17 +16,17 @@ import Settings from "../pages/settings.pages";
 import Notification from "../pages/notification.pages";
 import SignIn from "../pages/signin.pages";
 import SignUp from "../pages/signup.pages";
-import VerificationCode from "../pages/verification.pages";
+import VerificationCode from "../utils/verification.section";
 
 export default function AppRoutes() {
   const location = useLocation();
-  const state = location.state;
-  const backgroundLocation = state?.backgroundLocation || location;
+  const backgroundLocation = location.state?.backgroundLocation ?? location;
 
   return (
     <>
       <Routes location={backgroundLocation}>
         <Route
+          exact
           path="/"
           element={
             <Layout>
@@ -35,6 +35,7 @@ export default function AppRoutes() {
           }
         />
         <Route
+          exact
           path="/flights"
           element={
             <Layout>
@@ -43,6 +44,7 @@ export default function AppRoutes() {
           }
         />
         <Route
+          exact
           path="/flights/:id"
           element={
             <Layout>
@@ -51,6 +53,7 @@ export default function AppRoutes() {
           }
         />
         <Route
+          exact
           path="/farfable"
           element={
             <Layout>
@@ -59,6 +62,7 @@ export default function AppRoutes() {
           }
         />
         <Route
+          exact
           path="/firesight"
           element={
             <Layout>
@@ -67,6 +71,7 @@ export default function AppRoutes() {
           }
         />
         <Route
+          exact
           path="/notification"
           element={
             <Layout>
@@ -75,6 +80,7 @@ export default function AppRoutes() {
           }
         />
         <Route
+          exact
           path="/profile/:id"
           element={
             <Layout>
@@ -83,6 +89,7 @@ export default function AppRoutes() {
           }
         />
         <Route
+          exact
           path="/settings"
           element={
             <Layout>
@@ -94,20 +101,10 @@ export default function AppRoutes() {
       </Routes>
 
       {/* Modal overlays */}
-      {/* {location.pathname === "/signup" && (
-        <ResponsiveModal>
-          <SignUp />
-        </ResponsiveModal>
-      )}
-      {location.pathname === "/signin" && (
-        <ResponsiveModal>
-          <SignIn />
-        </ResponsiveModal>
-      )} */}
-
-      {backgroundLocation && (
+      { backgroundLocation && location !== backgroundLocation && (
         <Routes>
           <Route
+            exact
             path="/signin"
             element={
               <ResponsiveModal>
@@ -116,14 +113,7 @@ export default function AppRoutes() {
             }
           />
           <Route
-            path="/verificationCode"
-            element={
-              <ResponsiveModal>
-                <VerificationCode />
-              </ResponsiveModal>
-            }
-          />
-          <Route
+            exact
             path="/signup"
             element={
               <ResponsiveModal>

@@ -29,7 +29,7 @@ export default function EmailInput({ value, onChange }) {
       {/* Trailing icon (Clear button) */}
       {value && (
         <div
-          className="absolute right-4 top-1/2 -translate-y-1/2 text-emerald-500 cursor-pointer"
+          className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-emerald-500 cursor-pointer transition-all duration-300 delay-100"
           // onClick={() => onChange({ target: { value: "" } })}
         >
           <HugeiconsIcon

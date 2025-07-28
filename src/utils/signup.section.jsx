@@ -1,40 +1,36 @@
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { EmailInput, PasswordInput } from "../components/forms";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { CancelCircleIcon } from "@hugeicons/core-free-icons";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { CheckboxInput, EmailInput, EnterCode, PasswordInput } from "../components/forms";
-import { useState } from "react";
 
-export default function SignIn() {
-  const location = useLocation();
+export default function SignUpSection({
+  email,
+  setEmail,
+  password,
+  setPassword,
+  confirmPassword,
+  setConfirmPassword,
+  onNext,
+}) {
   const navigate = useNavigate();
+  const location = useLocation();
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [remember, setRemember] = useState(false);
+  const backgroundLocation = location.state?.backgroundLocation;
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    if (!email || !password) {
-      alert("All fields are required");
-      return;
-    }
-
-    // if (password !== confirmPassword) {
-    //   alert("Passwords do not match");
-    //   return;
-    // }
-
-    // Replace this with your API call or logic
-    console.log("Form submitted:", { email, password });
+    onNext();
   };
 
   return (
     <div className="flex flex-col items-center justify-center w-full">
-      {/* Header*/}
+      {/* Header */}
       <div className="flex items-center justify-between w-full relative border-b-1 border-gray-200 pb-4">
         {/* Close Button */}
-        <button className="w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300 delay-150 hover:bg-gray-50 cursor-pointer">
+        <button
+          onClick={() => navigate(backgroundLocation || "/")}
+          className="w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300 delay-150 hover:bg-gray-50 cursor-pointer"
+        >
           <HugeiconsIcon
             icon={CancelCircleIcon}
             size={24}
@@ -50,23 +46,23 @@ export default function SignIn() {
 
       {/* Title*/}
       <div className="flex flex-col items-center justify-center font-poppins text-center text-gray-900 gap-2 py-8">
-        <h3 className="font-semibold text-4xl">Sign In</h3>
+        <h3 className="font-semibold text-4xl">Sign Up</h3>
         <div className="flex items-center justify-center gap-1">
           <span className="text-gray-500 text-lg lg:text-base">
-            Don't have an account?
+            Already have an account?
           </span>
           <button
             className="underline text-gray-700 font-medium cursor-pointer text-lg lg:text-base hover:text-gray-900 transition-all duration-300 delay-150"
             // onClick={() => navigate("/signin")}
             onClick={() =>
-              navigate("/signup", {
+              navigate("/signin", {
                 state: location.state?.backgroundLocation
                   ? { backgroundLocation: location.state.backgroundLocation }
                   : {},
               })
             }
           >
-            Sign Up
+            Sign In
           </button>
         </div>
       </div>
@@ -82,7 +78,7 @@ export default function SignIn() {
             />
           </div>
           <span className="flex-1 text-center text-lg lg:text-base">
-            Sign In With Google
+            Sign Up With Google
           </span>
         </button>
 
@@ -95,7 +91,7 @@ export default function SignIn() {
             />
           </div>
           <span className="flex-1 text-center text-lg lg:text-base">
-            Sign In With Facebook
+            Sign Up With Facebook
           </span>
         </button>
       </div>
@@ -107,10 +103,10 @@ export default function SignIn() {
         <div className="h-px w-full bg-gray-200"></div>
       </div>
 
-      {/* Divider */}
+      {/* Form */}
       <main className="flex flex-col items-center font-poppins text-lg lg:text-base w-full gap-2 py-8">
         <div className="flex items-center justify-start w-full pb-4">
-          <span className="font-medium">Sign In with Email</span>
+          <span className="font-medium">Sign up with Email</span>
         </div>
         <form onSubmit={handleSubmit} className="w-full space-y-4">
           <EmailInput
@@ -123,31 +119,22 @@ export default function SignIn() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <div className="flex items-center justify-between w-full h-14">
-            <CheckboxInput
-              id="rememberMe"
-              name="rememberMe"
-              checked={remember}
-              onChange={(e) => setRemember(e.target.checked)}
-              label="Remember Me"
-              className="text-gray-200"
-            />
-            <Link to="/forgetPassword">
-              <span className="underline text-md font-poppins font-medium text-gray-700 cursor-pointer">
-                Forget Password?
-              </span>
-            </Link>
-          </div>
+          <PasswordInput
+            label="confirmPassword"
+            placeholderText="Confirm Password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
           <button
             type="submit"
             className="bg-emerald-500 flex items-center justify-center w-full h-14 mt-8 rounded-lg text-center text-white font-poppins font-medium cursor-pointer"
           >
-            <span>Sign In</span>
+            <span>Continue</span>
           </button>
         </form>
 
         <div className="flex items-center justify-center gap-1 text-xs mt-4">
-          <span className="text-gray-500 ">By clicking, you accept our</span>
+          <span className="text-gray-500 ">By continuing, you accept our</span>
           <Link
             to="/termscondition"
             className="underline text-gray-700 font-medium cursor-pointer hover:text-gray-900 transition-all duration-300 delay-150"
@@ -163,7 +150,6 @@ export default function SignIn() {
             Privacy Policy
           </Link>
         </div>
-
       </main>
     </div>
   );

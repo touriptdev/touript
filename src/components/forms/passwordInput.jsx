@@ -6,7 +6,7 @@ import {
   ViewOffSlashIcon,
 } from "@hugeicons/core-free-icons";
 
-export default function PasswordInput({ fieldName = "password", placeholderText = "Password", value, onChange }) {
+export default function PasswordInput({ label = "password", placeholderText = "Password", value, onChange }) {
   const [showPassword, setShowPassword] = useState(false);
 
   const toggleVisibility = () => setShowPassword((prev) => !prev);
@@ -14,8 +14,8 @@ export default function PasswordInput({ fieldName = "password", placeholderText 
   return (
     <div className="relative ">
       {/* Label for accssibility only */}
-      <label htmlFor={fieldName} className="sr-only">
-        Password
+      <label htmlFor={label} className="sr-only">
+        {label}
       </label>
 
       {/* Leading icon */}
@@ -29,9 +29,9 @@ export default function PasswordInput({ fieldName = "password", placeholderText 
 
       {/* Input field */}
       <input
-        id={fieldName}
+        id={label}
         type={showPassword ? "text" : "password"}
-        name={fieldName}
+        name={label}
         placeholder={placeholderText}
         value={value}
         autoComplete="current-password"
@@ -46,7 +46,7 @@ export default function PasswordInput({ fieldName = "password", placeholderText 
           type="button"
           onClick={toggleVisibility}
           aria-label={showPassword ? "Hide password" : "Show password"}
-          className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-600"
+          className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-900 transition-all duration-300 delay-100"
         >
           <HugeiconsIcon
             icon={showPassword ? ViewOffSlashIcon : ViewIcon}

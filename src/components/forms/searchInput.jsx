@@ -28,7 +28,7 @@ export default function SearchInput() {
       {/* Trailing icon (Clear button) */}
       {query && (
         <div
-          className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-700 cursor-pointer"
+          className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-900 cursor-pointer"
           onClick={clearInput}
         >
           <HugeiconsIcon icon={CancelCircleIcon} size={24} strokeWidth={2} />
