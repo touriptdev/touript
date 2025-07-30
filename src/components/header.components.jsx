@@ -127,7 +127,7 @@ function HeaderLarge() {
         </div>
       </div>
 
-      <div className="lg:hidden fixed bottom-0 flex items-center justify-evenly w-full shadow-[0_-1px_0px_rgba(0,0,0,0.05)] bg-white z-50">
+      <div className="fixed bottom-0 flex items-center justify-evenly w-full min-w-sm shadow-[0_-1px_0px_rgba(0,0,0,0.05)] bg-white z-100 lg:hidden ">
         {/* Mobile Animated Indicator */}
         <div
           className="absolute top-0 h-0.5 bg-emerald-500 transition-all duration-300 ease-in-out"

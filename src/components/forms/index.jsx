@@ -5,3 +5,4 @@ export { default as CheckboxInput } from './checkBoxInput';
 export { default as  EnterCode } from './enterCode';
 export { default as  DropdownSelect } from './dropdownSelect';
 export { default as  TextInput } from './textInput';
+export { default as  FileUpload } from './fileInput';

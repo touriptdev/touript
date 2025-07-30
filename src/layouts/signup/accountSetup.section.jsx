@@ -1,15 +1,32 @@
 import { HugeiconsIcon } from "@hugeicons/react";
-import { CancelCircleIcon, CircleIcon, UserAccountIcon,User02Icon } from "@hugeicons/core-free-icons";
+import {
+  CancelCircleIcon,
+  CircleIcon,
+  UserAccountIcon,
+  User02Icon,
+} from "@hugeicons/core-free-icons";
 import { Link } from "react-router-dom";
-import { DropdownSelect, TextInput } from "../components/forms";
+import { DropdownSelect, TextInput } from "../../components/forms";
 // import { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+// import { useLocation, useNavigate } from "react-router-dom";
+import { ModalHeader } from "../../layouts";
 
-export default function AccountSetup({ onBack, onNext, username, setUsername,firstname, lastname, setFirstname, setLastname, gender, setGender }) {
-  const navigate = useNavigate();
-  const location = useLocation();
+export default function AccountSetup({
+  onBack,
+  onNext,
+  username,
+  setUsername,
+  firstname,
+  lastname,
+  setFirstname,
+  setLastname,
+  gender,
+  setGender,
+}) {
+  // const navigate = useNavigate();
+  // const location = useLocation();
 
-  const backgroundLocation = location.state?.backgroundLocation;
+  // const backgroundLocation = location.state?.backgroundLocation;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -18,33 +35,16 @@ export default function AccountSetup({ onBack, onNext, username, setUsername,fir
   return (
     <div className="flex flex-col items-center justify-center w-full">
       {/* Header*/}
-      <div className="flex items-center justify-between w-full relative border-b-1 border-gray-200 pb-4">
-        {/* Close Button */}
-        <button
-          onClick={() => navigate(backgroundLocation || "/")}
-          className="w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300 delay-150 hover:bg-gray-50 cursor-pointer"
-        >
-          <HugeiconsIcon
-            icon={CancelCircleIcon}
-            size={24}
-            className="text-gray-700 hover:text-gray-900"
-            strokeWidth={2}
-          />
-        </button>
-        {/* heading of section */}
-        <h5 className="absolute left-1/2 my-auto -translate-x-1/2 flex-1 text-center font-medium text-lg lg:text-xl text-gray-900 font-poppins">
-          touript
-        </h5>
-      </div>
+      <ModalHeader title="touript" />
 
-      {/* Title*/}
+      {/* Title + Form*/}
       <main className="flex flex-col items-center justify-center font-poppins text-center text-gray-900 gap-2 py-8">
         <h3 className="font-semibold text-4xl">Account Set Up</h3>
         <div className="font-normal text-gray-500 text-lg lg:text-base leading-[1.7]">
           Let us know about you so that we can personalize your feed. You can
           use touript anonymously. So your username needs to be unique
         </div>
-
+        {/* Form*/}
         <form onSubmit={handleSubmit} className="w-full space-y-4 py-8">
           <TextInput
             label="username"
@@ -53,6 +53,7 @@ export default function AccountSetup({ onBack, onNext, username, setUsername,fir
             labelIcon={UserAccountIcon}
             placeholderText="Username"
             unique={true}
+            autocomplete="username"
           />
 
           <TextInput
@@ -61,14 +62,15 @@ export default function AccountSetup({ onBack, onNext, username, setUsername,fir
             onChange={(e) => setFirstname(e.target.value)}
             labelIcon={User02Icon}
             placeholderText="First Name"
-          />
+            autocomplete="given-name"
+            />
           <TextInput
-          // abel, labelIcon, value, onChange, placeholderText 
             label="lastname"
             value={lastname}
             onChange={(e) => setLastname(e.target.value)}
             labelIcon={User02Icon}
             placeholderText="Last Name"
+            autocomplete="family-name"
           />
 
           <DropdownSelect

@@ -1,16 +1,8 @@
-import { HugeiconsIcon } from "@hugeicons/react";
-import { CancelCircleIcon } from "@hugeicons/core-free-icons";
-import { Link } from "react-router-dom";
-import { EnterCode } from "../components/forms";
-// import { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+
+import { EnterCode } from "../../components/forms";
+import { ModalHeader } from "../../layouts";
 
 export default function VerificationCode({ onBack, onNext }) {
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  const backgroundLocation = location.state?.backgroundLocation;
-
   const sendEmailCode = () => {
     console.log("Email has been sent");
   };
@@ -23,26 +15,9 @@ export default function VerificationCode({ onBack, onNext }) {
   return (
     <div className="flex flex-col items-center justify-center w-full">
       {/* Header*/}
-      <div className="flex items-center justify-between w-full relative border-b-1 border-gray-200 pb-4">
-        {/* Close Button */}
-        <button
-          onClick={() => navigate(backgroundLocation || "/")}
-          className="w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300 delay-150 hover:bg-gray-50 cursor-pointer"
-        >
-          <HugeiconsIcon
-            icon={CancelCircleIcon}
-            size={24}
-            className="text-gray-700 hover:text-gray-900"
-            strokeWidth={2}
-          />
-        </button>
-        {/* heading of section */}
-        <h5 className="absolute left-1/2 my-auto -translate-x-1/2 flex-1 text-center font-medium text-lg lg:text-xl text-gray-900 font-poppins">
-          touript
-        </h5>
-      </div>
+      <ModalHeader title="touript" />
 
-      {/* Title*/}
+      {/* Title + Form */}
       <main className="flex flex-col items-center justify-center font-poppins text-center text-gray-900 gap-2 py-8">
         <h3 className="font-semibold text-4xl">Verification Code</h3>
         <div className="font-normal text-gray-500 text-lg lg:text-base leading-[1.7]">
@@ -50,6 +25,7 @@ export default function VerificationCode({ onBack, onNext }) {
           the code below to proceed.
         </div>
 
+        {/* Form */}
         <EnterCode />
 
         <div className="flex items-center justify-between w-full h-14">
@@ -67,7 +43,7 @@ export default function VerificationCode({ onBack, onNext }) {
             onClick={onBack}
             className="bg-gray-200 flex items-center justify-center w-full h-14 mt-8 rounded-lg text-center text-white font-poppins font-medium cursor-pointer"
           >
-            <span className="text-gray-900" >Back</span>
+            <span className="text-gray-900">Back</span>
           </button>
           <button
             onClick={handleVerification}

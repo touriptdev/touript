@@ -5,10 +5,20 @@
     --font-poppins: Poppins, "sans-serif";
 }
 
-
+html {
+  scroll-behavior: smooth;
+}
 
 *, ::before, ::after {
   box-sizing: border-box;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none; 
+  scrollbar-width: none;
 }
 
 

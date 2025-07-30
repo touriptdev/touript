@@ -1,9 +1,7 @@
 import { HugeiconsIcon } from "@hugeicons/react";
 import { CancelCircleIcon } from "@hugeicons/core-free-icons";
 import { useState } from "react";
-import SignUpSection from "../utils/signup.section";
-import VerificationCode from "../utils/verification.section";
-import AccountSetup from "../utils/accountSetup.section";
+import { SignUpSection, VerificationCode, AccountSetup } from "../layouts";
 
 export default function SignUp() {
   const [step, setStep] = useState(1);
@@ -16,7 +14,6 @@ export default function SignUp() {
   const [lastname, setLastname] = useState("");
   const [username, setUsername] = useState("");
   const [gender, setGender] = useState("");
-
 
   const handleSignUpForm = () => {
     // if (!email || !password || !confirmPassword) {
@@ -46,7 +43,6 @@ export default function SignUp() {
   return (
     <div className="flex flex-col items-center justify-center w-full">
       <main className="flex items-center justify-center w-full">
-        
         {step === 1 && (
           <SignUpSection
             email={email}
@@ -68,7 +64,7 @@ export default function SignUp() {
             username={username}
             setUsername={setUsername}
             gender={gender}
-            firstname={firstname} 
+            firstname={firstname}
             setFirstname={setFirstname}
             lastname={lastname}
             setLastname={setLastname}
@@ -77,8 +73,6 @@ export default function SignUp() {
             onNext={handleAccountSetup}
           />
         )}
-
-
       </main>
     </div>
   );

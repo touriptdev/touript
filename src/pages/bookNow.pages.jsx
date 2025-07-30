@@ -91,7 +91,6 @@
 //   }
 // }, [active]);
 
-
 //   return (
 //     <div className="flex items-center justify-center">
 //       <div
@@ -200,7 +199,7 @@
 //                 // left: `${hoverRect.menuLeft}px`,
 //                 width: `${hoverRect.menuWidth}px`,
 //                 height: popoverHeight || 0,
-                
+
 //               }}
 //             >
 //               <SlideWrapper index={0} active={active}>
@@ -237,9 +236,6 @@
 //   );
 // }
 
-
-
-
 import { useEffect, useRef, useState } from "react";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
@@ -257,6 +253,8 @@ import Menu0 from "./menu0";
 import Menu1 from "./menu1";
 import Menu2 from "./menu2";
 import { SlideWrapper } from "./slideWrapper";
+import { ResponsiveModal } from "../layouts";
+import EditProfile from "./editProfile.pages";
 
 export default function BookNow() {
   const tabs = [
@@ -289,11 +287,21 @@ export default function BookNow() {
   ];
 
   const [active, setActive] = useState(null);
-  const [hoverRect, setHoverRect] = useState({ highlightLeft: 0, highlightWidth: 0, menuLeft: 0, menuWidth: 600 });
+  const [hoverRect, setHoverRect] = useState({
+    highlightLeft: 0,
+    highlightWidth: 0,
+    menuLeft: 0,
+    menuWidth: 600,
+  });
   const [popoverHeight, setPopoverHeight] = useState(0);
 
   const tabRefs = useRef([]);
   const menuRefs = useRef([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const toggleModal = () => {
+    setIsModalOpen((prev) => !prev);
+  };
 
   // Handle click outside
   useEffect(() => {
@@ -315,7 +323,9 @@ export default function BookNow() {
     const el = menuRefs.current[active];
     if (!el) return;
 
-    const observer = new ResizeObserver(() => setPopoverHeight(el.offsetHeight));
+    const observer = new ResizeObserver(() =>
+      setPopoverHeight(el.offsetHeight)
+    );
     observer.observe(el);
     setPopoverHeight(el.offsetHeight); // Set initial height
 
@@ -331,7 +341,10 @@ export default function BookNow() {
 
     const menuWidth = 600;
     const tabCenter = tabRect.left - parentRect.left + tabRect.width / 2;
-    const menuLeft = Math.max(0, Math.min(tabCenter - menuWidth / 2, parentRect.width - menuWidth));
+    const menuLeft = Math.max(
+      0,
+      Math.min(tabCenter - menuWidth / 2, parentRect.width - menuWidth)
+    );
 
     setHoverRect({
       highlightLeft: tabRect.left - parentRect.left,
@@ -344,88 +357,122 @@ export default function BookNow() {
   };
 
   return (
-    <div className="flex items-center justify-center">
-      <div
-        className={clsx(
-          "max-w-5xl  h-22 relative flex items-center justify-center px-1 py-1 rounded-lg border border-gray-100",
-          active !== null ? "bg-gray-50 shadow-none" : "bg-white shadow-xl shadow-gray-200"
-        )}
-      >
-        {tabs.map((tab, idx) => (
-          <button
-            key={idx}
-            onClick={() => handleTabClick(idx)}
-            ref={(el) => (tabRefs.current[idx] = el)}
-            className={clsx(
-              "z-1 px-4 h-full min-w-57 font-poppins relative flex items-center cursor-pointer rounded-lg hover:bg-gray-100",
-              idx===3? "pr-20":"",
-              active === idx && "hover:bg-transparent"
-            )}
-          >
-            <div className="flex items-center gap-2">
-              <HugeiconsIcon icon={tab.primaryIcon} size={24} strokeWidth={2} className="text-gray-400" />
-              <div className="flex flex-col items-start">
-                <span className="font-semibold text-xs text-gray-700">{tab.label}</span>
-                <div className="flex items-center gap-1 text-base text-gray-900 font-medium">
-                  <span className="font-normal text-gray-700">{tab.primaryText}</span>
-                  {tab.secondaryIcon && (
-                    <>
-                      <HugeiconsIcon icon={tab.secondaryIcon} size={16} strokeWidth={2} className="text-gray-400" />
-                      <span className="font-normal text-gray-700">{tab.secondaryText}</span>
-                    </>
-                  )}
+    <div>
+      <div className="flex items-center justify-center">
+        <div
+          className={clsx(
+            "max-w-5xl  h-22 relative flex items-center justify-center px-1 py-1 rounded-lg border border-gray-100",
+            active !== null
+              ? "bg-gray-50 shadow-none"
+              : "bg-white shadow-xl shadow-gray-200"
+          )}
+        >
+          {tabs.map((tab, idx) => (
+            <button
+              key={idx}
+              onClick={() => handleTabClick(idx)}
+              ref={(el) => (tabRefs.current[idx] = el)}
+              className={clsx(
+                "z-1 px-4 h-full min-w-57 font-poppins relative flex items-center cursor-pointer rounded-lg hover:bg-gray-100",
+                idx === 3 ? "pr-20" : "",
+                active === idx && "hover:bg-transparent"
+              )}
+            >
+              <div className="flex items-center gap-2">
+                <HugeiconsIcon
+                  icon={tab.primaryIcon}
+                  size={24}
+                  strokeWidth={2}
+                  className="text-gray-400"
+                />
+                <div className="flex flex-col items-start">
+                  <span className="font-semibold text-xs text-gray-700">
+                    {tab.label}
+                  </span>
+                  <div className="flex items-center gap-1 text-base text-gray-900 font-medium">
+                    <span className="font-normal text-gray-700">
+                      {tab.primaryText}
+                    </span>
+                    {tab.secondaryIcon && (
+                      <>
+                        <HugeiconsIcon
+                          icon={tab.secondaryIcon}
+                          size={16}
+                          strokeWidth={2}
+                          className="text-gray-400"
+                        />
+                        <span className="font-normal text-gray-700">
+                          {tab.secondaryText}
+                        </span>
+                      </>
+                    )}
+                  </div>
                 </div>
               </div>
+            </button>
+          ))}
+
+          {/* Highlight background */}
+          {active !== null && (
+            <div
+              className="absolute h-20 bg-white rounded-lg shadow-xl shadow-gray-200 transition-all duration-300 z-0"
+              style={{
+                left: `${hoverRect.highlightLeft}px`,
+                width: `${hoverRect.highlightWidth}px`,
+              }}
+            />
+          )}
+
+          {/* Popover Menu */}
+          {active !== null && (
+            <div
+              className="popover-content absolute top-20 pt-6 max-w-xl duration-300"
+              style={{ left: hoverRect.menuLeft }}
+            >
+              <div
+                className="bg-white rounded-lg shadow-2xl shadow-gray-300 transition-all duration-300"
+                style={{
+                  width: hoverRect.menuWidth,
+                  height: popoverHeight || 0,
+                }}
+              >
+                <SlideWrapper index={0} active={active}>
+                  <Menu0 ref={(el) => (menuRefs.current[0] = el)} />
+                </SlideWrapper>
+                <SlideWrapper index={1} active={active}>
+                  <Menu1 ref={(el) => (menuRefs.current[1] = el)} />
+                </SlideWrapper>
+                <SlideWrapper index={2} active={active}>
+                  <Menu2 ref={(el) => (menuRefs.current[2] = el)} />
+                </SlideWrapper>
+                <SlideWrapper index={3} active={active}>
+                  <Menu0 ref={(el) => (menuRefs.current[3] = el)} />
+                </SlideWrapper>
+              </div>
+            </div>
+          )}
+
+          {/* Search Button */}
+          <button className="absolute right-4 z-10 cursor-pointer">
+            <div className="bg-emerald-500 rounded-full w-12 h-12 flex items-center justify-center">
+              <HugeiconsIcon
+                icon={Search01Icon}
+                size={24}
+                strokeWidth={2}
+                className="text-white"
+              />
             </div>
           </button>
-        ))}
-
-        {/* Highlight background */}
-        {active !== null && (
-          <div
-            className="absolute h-20 bg-white rounded-lg shadow-xl shadow-gray-200 transition-all duration-300 z-0"
-            style={{
-              left: `${hoverRect.highlightLeft}px`,
-              width: `${hoverRect.highlightWidth}px`,
-            }}
-          />
-        )}
-
-        {/* Popover Menu */}
-        {active !== null && (
-          <div
-            className="popover-content absolute top-20 pt-6 max-w-xl duration-300"
-            style={{ left: hoverRect.menuLeft }}
-          >
-            <div
-              className="bg-white rounded-lg shadow-2xl shadow-gray-300 transition-all duration-300"
-              style={{ width: hoverRect.menuWidth, height: popoverHeight || 0 }}
-            >
-              <SlideWrapper index={0} active={active}>
-                <Menu0 ref={(el) => (menuRefs.current[0] = el)} />
-              </SlideWrapper>
-              <SlideWrapper index={1} active={active}>
-                <Menu1 ref={(el) => (menuRefs.current[1] = el)} />
-              </SlideWrapper>
-              <SlideWrapper index={2} active={active}>
-                <Menu2 ref={(el) => (menuRefs.current[2] = el)} />
-              </SlideWrapper>
-              <SlideWrapper index={3} active={active}>
-                <Menu0 ref={(el) => (menuRefs.current[3] = el)} />
-              </SlideWrapper>
-            </div>
-          </div>
-        )}
-
-        {/* Search Button */}
-        <button className="absolute right-4 z-10 cursor-pointer">
-          <div className="bg-emerald-500 rounded-full w-12 h-12 flex items-center justify-center">
-            <HugeiconsIcon icon={Search01Icon} size={24} strokeWidth={2} className="text-white" />
-          </div>
-        </button>
-
-
+        </div>
       </div>
+
+      <button onClick={toggleModal}>Edit Profile</button>
+
+      {isModalOpen && (
+        <ResponsiveModal onClose={toggleModal}>
+          <EditProfile onClose={toggleModal} />
+        </ResponsiveModal>
+      )}
     </div>
   );
 }

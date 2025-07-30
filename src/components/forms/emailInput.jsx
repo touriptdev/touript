@@ -22,6 +22,7 @@ export default function EmailInput({ value, onChange }) {
         placeholder="Email Address"
         value={value}
         onChange={onChange}
+        autoComplete="email"
         // required
         className="w-full px-14 h-14 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 transition-all duration-300 delay-100"
       />

@@ -1,7 +1,7 @@
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { EmailInput, PasswordInput } from "../components/forms";
-import { HugeiconsIcon } from "@hugeicons/react";
-import { CancelCircleIcon } from "@hugeicons/core-free-icons";
+import { Link } from "react-router-dom";
+import { EmailInput, PasswordInput } from "../../components/forms";
+import { ModalHeader } from "../../layouts";
+import { useNavigate } from "react-router-dom";
 
 export default function SignUpSection({
   email,
@@ -13,10 +13,6 @@ export default function SignUpSection({
   onNext,
 }) {
   const navigate = useNavigate();
-  const location = useLocation();
-
-  const backgroundLocation = location.state?.backgroundLocation;
-
   const handleSubmit = (e) => {
     e.preventDefault();
     onNext();
@@ -25,24 +21,7 @@ export default function SignUpSection({
   return (
     <div className="flex flex-col items-center justify-center w-full">
       {/* Header */}
-      <div className="flex items-center justify-between w-full relative border-b-1 border-gray-200 pb-4">
-        {/* Close Button */}
-        <button
-          onClick={() => navigate(backgroundLocation || "/")}
-          className="w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300 delay-150 hover:bg-gray-50 cursor-pointer"
-        >
-          <HugeiconsIcon
-            icon={CancelCircleIcon}
-            size={24}
-            className="text-gray-700 hover:text-gray-900"
-            strokeWidth={2}
-          />
-        </button>
-        {/* heading of section */}
-        <h5 className="absolute left-1/2 my-auto -translate-x-1/2 flex-1 text-center font-medium text-lg lg:text-xl text-gray-900 font-poppins">
-          touript
-        </h5>
-      </div>
+      <ModalHeader title="touript" />
 
       {/* Title*/}
       <div className="flex flex-col items-center justify-center font-poppins text-center text-gray-900 gap-2 py-8">
@@ -53,7 +32,6 @@ export default function SignUpSection({
           </span>
           <button
             className="underline text-gray-700 font-medium cursor-pointer text-lg lg:text-base hover:text-gray-900 transition-all duration-300 delay-150"
-            // onClick={() => navigate("/signin")}
             onClick={() =>
               navigate("/signin", {
                 state: location.state?.backgroundLocation
@@ -133,6 +111,7 @@ export default function SignUpSection({
           </button>
         </form>
 
+        {/* Terms & Conditions */}
         <div className="flex items-center justify-center gap-1 text-xs mt-4">
           <span className="text-gray-500 ">By continuing, you accept our</span>
           <Link
