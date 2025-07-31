@@ -32,7 +32,7 @@ export default function EditProfile({ onClose }) {
 
 
 
-        <FileUpload />
+        <FileUpload multiFile={true}/>
       </div>
     </div>
   );

@@ -371,7 +371,7 @@ function MultiFileInput() {
           imageSrc={previewUrls[currentFileIndex]}
           onCancel={() => setShowCropper(false)}
           onComplete={handleCropComplete}
-          outputOptions={{ imgDimention: 872 }}
+          outputOptions={{ imgDimention: 1308 }}
         />
       )}
     </div>
