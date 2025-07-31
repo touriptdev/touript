@@ -468,6 +468,8 @@ export default function BookNow() {
 
       <button onClick={toggleModal}>Edit Profile</button>
 
+      
+
       {isModalOpen && (
         <ResponsiveModal onClose={toggleModal}>
           <EditProfile onClose={toggleModal} />
