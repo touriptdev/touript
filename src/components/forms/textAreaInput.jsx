@@ -1,24 +1,33 @@
-import React, { useState } from "react";
+// import React, { useState } from "react";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { File01Icon } from "@hugeicons/core-free-icons";
+import clsx from "clsx";
 
-export default function TextAreaInput({ label, useLabelIcon = true }) {
-  const [text, setText] = useState("");
-  const [isFocused, setIsFocused] = useState(false);
-
-  const maxLength = 500; // Character limit
-  const minRows = 4;
+export default function TextAreaInput({
+  label,
+  useLabelIcon = true,
+  value,
+  onChange,
+  maxLength,
+}) {
+  // const [isFocused, setIsFocused] = useState(false);
+  const minRows = 2;
   const maxRows = 8;
 
-  // Auto-resize textarea based on content
   const handleTextChange = (e) => {
-    setText(e.target.value);
+    let newValue = e.target.value;
 
-    // Auto-resize
+    // Enforce max length
+    if (maxLength && newValue.length > maxLength) {
+      newValue = newValue.slice(0, maxLength);
+    }
+
+    onChange(newValue);
+
     const textarea = e.target;
     textarea.style.height = "auto";
     const scrollHeight = textarea.scrollHeight;
-    const lineHeight = 24; // Approximate line height
+    const lineHeight = 24;
     const rows = Math.min(
       Math.max(Math.ceil(scrollHeight / lineHeight), minRows),
       maxRows
@@ -26,9 +35,9 @@ export default function TextAreaInput({ label, useLabelIcon = true }) {
     textarea.style.height = `${rows * lineHeight}px`;
   };
 
-  const remainingChars = maxLength - text.length;
-  const isNearLimit = remainingChars <= 50;
-  const isOverLimit = remainingChars < 0;
+  const remainingChars = maxLength - (value?.length || 0);
+  const isNearLimit = remainingChars <= 20;
+  const isOverLimit = remainingChars === 0;
 
   return (
     <div className="w-full relative font-poppins">
@@ -36,62 +45,54 @@ export default function TextAreaInput({ label, useLabelIcon = true }) {
         {label}
       </label>
 
-      {/* Textarea */}
-      <div className="absolute left-4 top-4 text-gray-900">
-        {useLabelIcon && (
+      {/* Icon */}
+      {useLabelIcon && (
+        <div className="absolute left-4 top-4 text-gray-900">
           <HugeiconsIcon icon={File01Icon} size={24} strokeWidth={2} />
-        )}
-      </div>
+        </div>
+      )}
+
+      {/* Textarea */}
       <textarea
-        value={text}
+        id={label}
+        name={label}
+        value={value}
         onChange={handleTextChange}
-        onFocus={() => setIsFocused(true)}
-        onBlur={() => setIsFocused(false)}
+        // onFocus={() => setIsFocused(true)}
+        // onBlur={() => setIsFocused(false)}
         placeholder="Enter your message here..."
         rows={minRows}
-        className={`w-full px-14 py-4 border rounded-lg resize-none focus:outline-none transition-colors ${
-          isFocused
-            ? "border-blue-500 ring-2 ring-blue-500 ring-opacity-20"
-            : isOverLimit
-            ? "border-red-300 hover:border-red-400"
-            : "border-gray-300 hover:border-gray-400"
-        }`}
+        className={clsx(
+          "w-full px-14 py-4 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 transition-all duration-300 delay-150"
+        )}
         style={{
           minHeight: `${minRows * 24}px`,
           maxHeight: `${maxRows * 24}px`,
         }}
       />
 
-      {/* Character count and info */}
+      {/* Character count */}
       <div className="flex items-center justify-between mt-2 text-sm">
-        <div className="text-gray-500">
-          {text.split("\n").length} line
-          {text.split("\n").length !== 1 ? "s" : ""} •{" "}
-          {text.split(" ").filter((word) => word.length > 0).length} word
-          {text.split(" ").filter((word) => word.length > 0).length !== 1
-            ? "s"
-            : ""}
-        </div>
+        {/* Validation */}
 
         <div
-          className={`font-medium ${
+          className={`font-normal ${
             isOverLimit
-              ? "text-red-600"
+              ? "text-pink-500"
               : isNearLimit
-              ? "text-yellow-600"
-              : "text-gray-500"
+              ? "text-yellow-500"
+              : "text-gray-900"
           }`}
         >
-          {remainingChars} characters remaining
+          {remainingChars}
+          <span className="text-gray-400">/500 characters remaining</span>
         </div>
+        {isOverLimit && (
+          <p className=" text-pink-500">
+            Maximum length of {maxLength} characters
+          </p>
+        )}
       </div>
-
-      {/* Validation message */}
-      {isOverLimit && (
-        <p className="mt-1 text-sm text-red-600">
-          Message exceeds the maximum length of {maxLength} characters.
-        </p>
-      )}
     </div>
   );
 }

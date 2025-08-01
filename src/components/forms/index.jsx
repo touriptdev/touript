@@ -12,4 +12,5 @@ export { default as  MultiSelectTagInput } from './multiSelectTagInput';
 export { default as  MultiImagesInput } from './multiImagesInput';
 export { default as  PrivacyDropdownSelect } from './privacyDropDown';
 export { default as  TextAreaInput } from './textAreaInput';
+export { default as  PhoneNumberInput } from './phoneNumberInput';
 

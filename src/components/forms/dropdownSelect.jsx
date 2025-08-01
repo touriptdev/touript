@@ -48,6 +48,8 @@ export default function DropdownSelect({
 
       {/* Button But working as Select Input ( Custom Made ) */}
       <button
+        id={label}
+        name={label}
         type="button"
         onClick={() => setIsOpen((prev) => !prev)}
         className="w-full h-14 px-14 border border-gray-200 rounded-lg text-left text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-gray-900 transition-all duration-300 delay-100 cursor-pointer"
@@ -68,7 +70,7 @@ export default function DropdownSelect({
       {/* Dropdown List */}
       {isOpen && (
         <ul className="absolute z-10 w-full mt-1  bg-white border border-gray-200 rounded-lg shadow-xl overflow-auto text-start">
-          {options.map((opt,idx) => (
+          {options.map((opt, idx) => (
             <li
               key={opt.value}
               onClick={() => {
@@ -78,14 +80,18 @@ export default function DropdownSelect({
               className={clsx(
                 "px-4 py-4 cursor-pointer hover:bg-gray-100 text-gray-900 border-b border-gray-200 transition-all duration-300 delay-150",
                 value === opt.value ? "font-medium" : "",
-                idx === options.length - 1 ? "border-none" : "border-b border-gray-200"
+                idx === options.length - 1
+                  ? "border-none"
+                  : "border-b border-gray-200"
               )}
             >
               <div className="flex items-center justify-start gap-4">
                 <HugeiconsIcon
                   icon={CheckmarkCircle01Icon}
                   size={24}
-                  className={(value === opt.value ? "text-gray-900": "text-transparent")}
+                  className={
+                    value === opt.value ? "text-gray-900" : "text-transparent"
+                  }
                   strokeWidth={2}
                 />
                 <span>{opt.label}</span>

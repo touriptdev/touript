@@ -96,7 +96,6 @@
 //   );
 // }
 
-
 import { useState, useRef, useEffect } from "react";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
@@ -129,8 +128,12 @@ export default function PrivacyDropdownSelect({
   }, []);
 
   const selectedOption = options.find((opt) => opt.value === value);
-  const selectedIcon = selectedOption?.icon || (defaultPrivacy === "private" ? SquareLock01Icon : GlobalIcon);
-  const selectedLabel = selectedOption?.label || (defaultPrivacy === "private" ? "Private" : "Public");
+  const selectedIcon =
+    selectedOption?.icon ||
+    (defaultPrivacy === "private" ? SquareLock01Icon : GlobalIcon);
+  const selectedLabel =
+    selectedOption?.label ||
+    (defaultPrivacy === "private" ? "Private" : "Public");
 
   return (
     <div ref={dropdownRef} className={clsx("relative", className)}>
@@ -141,13 +144,16 @@ export default function PrivacyDropdownSelect({
 
       {/* Trigger Button */}
       <button
+        id={label}
         type="button"
         onClick={() => setIsOpen((prev) => !prev)}
         className="w-full h-14 pl-4 pr-14 border border-gray-200 rounded-lg text-left bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-900 transition duration-200 relative"
       >
         <div className="flex items-center">
           <HugeiconsIcon icon={selectedIcon} size={24} strokeWidth={2} />
-          <span className="text-sm font-medium invisible w-0">{selectedLabel}</span>
+          <span className="text-sm font-medium invisible w-0">
+            {selectedLabel}
+          </span>
         </div>
 
         <span className="absolute inset-y-0 right-4 flex items-center">
