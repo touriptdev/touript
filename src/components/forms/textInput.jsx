@@ -55,7 +55,7 @@ export default function TextInput({
 
       {value && (
         <div
-          className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-900 cursor-pointer"
+          className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-900 cursor-pointer"
           onClick={() => onChange({ target: { value: "" } })}
         >
           <HugeiconsIcon icon={CancelCircleIcon} size={24} strokeWidth={2} />

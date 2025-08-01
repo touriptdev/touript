@@ -61,7 +61,7 @@
 
 // ImageCropper.jsx
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import Cropper from "react-easy-crop";
 // import Slider from "@mui/material/Slider";
 import getCroppedImg from "../utils/getCroppedImgUtils";
@@ -71,31 +71,53 @@ export default function ImageCrop({
   imageSrc,
   onCancel,
   onComplete,
-  outputOptions,
+  options,
   cropShape = "rect",
-  cropHeight = 436
+  cropHeight = 436,
+  autoCrop = false,
 }) {
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
+  const hasAutoCropped = useRef(false);
+
 
   const onCropComplete = useCallback((_, croppedAreaPixels) => {
     setCroppedAreaPixels(croppedAreaPixels);
   }, []);
 
+  useEffect(() => {
+    if (
+      autoCrop &&
+      !hasAutoCropped.current &&
+      croppedAreaPixels?.width &&
+      croppedAreaPixels?.height
+    ) {
+      hasAutoCropped.current = true;
+      handleDone(); // Auto-crop!
+    }
+  }, [croppedAreaPixels, autoCrop]);
+  
+
   const handleDone = async () => {
-    const croppedImageUrl = await getCroppedImg(
+    const { file, previewUrl } = await getCroppedImg(
       imageSrc,
       croppedAreaPixels,
-      outputOptions
+      options
     );
-    onComplete(croppedImageUrl);
+    onComplete(previewUrl, file);
   };
 
   return (
     <>
       <div className="flex flex-col items-center justify-center bg-gray-50 rounded-lg border border-gray-200 gap-8 pb-8 mt-4">
-        <div className={clsx ("bg-white w-full", cropHeight === 264? "h-66":"h-109","relative rounded-t-lg overflow-hidden")}>
+        <div
+          className={clsx(
+            "bg-white w-full",
+            cropHeight === 264 ? "h-66" : "h-109",
+            "relative rounded-t-lg overflow-hidden"
+          )}
+        >
           <Cropper
             image={imageSrc}
             crop={crop}
