@@ -24,6 +24,10 @@ import {
   RealEstate02Icon,
   RoadLocation01Icon,
   GlobeIcon,
+  Baby01Icon,
+  Home03Icon,
+  Backpack01Icon,
+  FavouriteCircleIcon,
 } from "@hugeicons/core-free-icons";
 
 export default function EditProfile({ onClose }) {
@@ -53,6 +57,15 @@ export default function EditProfile({ onClose }) {
   const [country, setCountry] = useState("");
   const [countryPrivacy, setCountryPrivacy] = useState("");
 
+  const [birthCountry, setBirthCountry] = useState("");
+  const [birthCountryPrivacy, setBirthCountryPrivacy] = useState("");
+  const [currentCountry, setCurrentCountry] = useState("");
+  const [currentCountryPrivacy, setCurrentCountryPrivacy] = useState("");
+  const [visitedCountry, setVisitedCountry] = useState([]);
+  const [visitedCountryPrivacy, setVisitedCountryPrivacy] = useState("");
+
+  const [interest, setInterest] = useState([]);
+
   // const [multiImage, setMultiImage] = useState(null);
 
   const countryOptions = [
@@ -62,11 +75,11 @@ export default function EditProfile({ onClose }) {
     { id: 4, label: "Pakistan", value: "pak" },
   ];
 
-  // const techOptions = [
-  //   { id: 1, label: "JavaScript", value: "javascript" },
-  //   { id: 2, label: "React", value: "react" },
-  //   { id: 3, label: "Python", value: "python" },
-  // ];
+  const techOptions = [
+    { id: 1, label: "JavaScript", value: "javascript" },
+    { id: 2, label: "React", value: "react" },
+    { id: 3, label: "Python", value: "python" },
+  ];
 
   // const options = [
   //   { id: 1, label: "Apple", value: "apple" },
@@ -87,12 +100,47 @@ export default function EditProfile({ onClose }) {
     { id: 1, value: "public", label: "Public", icon: GlobalIcon },
     { id: 2, value: "private", label: "Private", icon: SquareLock01Icon },
   ];
+  const handleSignUpForm = (e) => {
+    e.preventDefault();
+    console.log("Form submitted:", {
+      image,
+      firstname,
+      firstnamePrivacy,
+      lastname,
+      lastnamePrivacy,
+      gender,
+      genderPrivacy,
+      bio,
+      email,
+      emailPrivacy,
+      phoneNumber,
+      phoneNumberPrivacy,
+      streetAddress,
+      streetAddressPrivacy,
+      city,
+      cityPrivacy,
+      state,
+      statePrivacy,
+      zipCode,
+      zipCodePrivacy,
+      country,
+      countryPrivacy,
+      birthCountry,
+      birthCountryPrivacy,
+      currentCountry,
+      currentCountryPrivacy,
+      visitedCountry,
+      visitedCountryPrivacy,
+      interest,
+    });
+  };
+
   return (
     <div className="font-poppins">
       {/* Header */}
       <ModalHeader title="Edit Profile" onClose={onClose} />
 
-      <div>
+      <form onSubmit={handleSignUpForm}>
         <div className="flex flex-col items-center w-full py-4">
           <div className="flex items-center text-base font-poppins font-medium pb-4 w-full">
             Profile Photo
@@ -359,38 +407,158 @@ export default function EditProfile({ onClose }) {
           </div>
         </div>
 
-        
+        <div className="flex flex-col items-center w-full py-4 gap-4">
+          <div className="flex items-center text-base font-poppins font-medium w-full">
+            Places
+          </div>
 
-        {/* <SearchSelect
-          label="Fruits"
-          labelIcon={AppleIcon}
-          options={options}
-          value={fruit}
-          onChange={(e) => setFruit(e.target.value)}
-        /> */}
+          {/* Birth Country */}
+          <div className="flex items-center justify-start w-full gap-2">
+            <div className="flex-1 w-full">
+              <SearchSelect
+                label="birthCountry"
+                labelIcon={Baby01Icon}
+                options={countryOptions}
+                value={birthCountry}
+                onChange={(e) => setBirthCountry(e.target.value)}
+              />
+            </div>
 
-        {/* <MultiSelectTagInput
-          label="Fruits"
-          labelIcon={AppleIcon}
-          options={options}
-          value={tags}
-          onChange={setTags}
-        /> */}
+            <div className="">
+              <PrivacyDropdownSelect
+                label="birthCountryPrivacy"
+                value={birthCountryPrivacy}
+                onChange={(e) => setBirthCountryPrivacy(e.target.value)}
+                options={privacyOptions}
+                defaultPrivacy="public"
+              />
+            </div>
+          </div>
 
-        {/* <MultiImagesInput
-          label="Fruits"
-          value={multiImage}
-          cropShape="rect"
-          cropHeight={1090}
-          maxFiles={3}
-          options={1090}
-          onChange={(croppedUrl, file) => {
-            setMultiImage(croppedUrl);
-            console.log(croppedUrl);
-            console.log(file);
-          }}
-        /> */}
-      </div>
+          {/* Current Country */}
+          <div className="flex items-center justify-start w-full gap-2">
+            <div className="flex-1 w-full">
+              <SearchSelect
+                label="currentCountry"
+                labelIcon={Home03Icon}
+                options={countryOptions}
+                value={currentCountry}
+                onChange={(e) => setCurrentCountry(e.target.value)}
+              />
+            </div>
+
+            <div className="">
+              <PrivacyDropdownSelect
+                label="currentCountryPrivacy"
+                value={currentCountryPrivacy}
+                onChange={(e) => setCurrentCountryPrivacy(e.target.value)}
+                options={privacyOptions}
+                defaultPrivacy="public"
+              />
+            </div>
+          </div>
+
+          {/* Visited Country */}
+          <div className="flex items-start justify-start w-full gap-2">
+            <div className="flex-1 w-full">
+              <MultiSelectTagInput
+                label="visitedCountry"
+                labelIcon={Backpack01Icon}
+                options={countryOptions}
+                value={visitedCountry}
+                onChange={setVisitedCountry}
+                allowCustom={false}
+              />
+            </div>
+
+            <div className="">
+              <PrivacyDropdownSelect
+                label="visitedCountryPrivacy"
+                value={visitedCountryPrivacy}
+                onChange={(e) => setVisitedCountryPrivacy(e.target.value)}
+                options={privacyOptions}
+                defaultPrivacy="public"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className="flex flex-col items-center w-full py-4 gap-4">
+          <div className="flex items-center text-base font-poppins font-medium w-full">
+            Interests
+          </div>
+
+          {/* Visited Country */}
+          <div className="flex items-start justify-start w-full gap-2">
+            <div className="flex-1 w-full">
+              <MultiSelectTagInput
+                label="interest"
+                labelIcon={FavouriteCircleIcon}
+                options={techOptions}
+                value={interest}
+                onChange={setInterest}
+              />
+            </div>
+
+            {/* <div className="">
+              <PrivacyDropdownSelect
+                label="visitedCountryPrivacy"
+                value={visitedCountryPrivacy}
+                onChange={(e) => setVisitedCountryPrivacy(e.target.value)}
+                options={privacyOptions}
+                defaultPrivacy="public"
+              />
+            </div> */}
+          </div>
+        </div>
+
+        <div className="flex flex-col items-center w-full py-4 gap-4">
+          <div className="flex items-center text-base font-poppins font-medium w-full">
+            Social Links
+          </div>
+          <button className="w-full h-14 flex items-center justify-bewteen px-4 bg-gray-50 border-1 border-gray-200 rounded-lg cursor-pointer transition-all duration-300 delay-150 hover:bg-white hover:shadow-lg shadow-gray-200 hover:border-transparent">
+            <div className="w-6 h-6 flex items-center justify-center">
+              <img
+                src="/images/google.png"
+                alt="Google Logo"
+                className="cover-fit"
+              />
+            </div>
+            <span className="flex-1 text-center text-lg lg:text-base">
+              Connect With Google
+            </span>
+          </button>
+
+          <button className="w-full h-14 flex items-center justify-bewteen px-4 bg-gray-50 border-1 border-gray-200 rounded-lg cursor-pointer transition-all duration-300 delay-150 hover:bg-white hover:shadow-lg shadow-gray-200 hover:border-transparent">
+            <div className="w-6 h-6 flex items-center justify-center">
+              <img
+                src="/images/facebook.png"
+                alt="Facebook Logo"
+                className="cover-fit"
+              />
+            </div>
+            <span className="flex-1 text-center text-lg lg:text-base">
+              Connect With Facebook
+            </span>
+          </button>
+        </div>
+
+        <div className="flex items-center justify-between w-full gap-4">
+          <button
+            // onClick={onBack}
+            className="bg-gray-200 flex items-center justify-center w-full h-14 mt-8 rounded-lg text-center text-white font-poppins font-medium cursor-pointer"
+          >
+            <span className="text-gray-900">Back</span>
+          </button>
+
+          <button
+            type="submit"
+            className="bg-emerald-500 flex items-center justify-center w-full h-14 mt-8 rounded-lg text-center text-white font-poppins font-medium cursor-pointer"
+          >
+            <span>Continue</span>
+          </button>
+        </div>
+      </form>
     </div>
   );
 }
