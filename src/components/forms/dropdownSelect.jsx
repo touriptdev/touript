@@ -12,6 +12,7 @@ export default function DropdownSelect({
   onChange,
   options = [],
   labelIcon,
+  placeholder = "Select",
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -51,10 +52,11 @@ export default function DropdownSelect({
         id={label}
         name={label}
         type="button"
+        placeholder={placeholder}
         onClick={() => setIsOpen((prev) => !prev)}
         className="w-full h-14 px-14 border border-gray-200 rounded-lg text-left text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-gray-900 transition-all duration-300 delay-100 cursor-pointer"
       >
-        {selectedLabel || <span className="text-gray-400">Select {label}</span>}
+        {selectedLabel || <span className="text-gray-400">{placeholder}</span>}
 
         {/* Dropdown Icon (Inside the button ) */}
         <span className="absolute inset-y-0 right-4 flex items-center ">

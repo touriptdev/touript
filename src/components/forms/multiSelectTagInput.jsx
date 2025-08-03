@@ -14,6 +14,7 @@ export default function MultiSelectTagInput({
   value = [],
   onChange = () => {},
   allowCustom = true,
+  useLabelIcon = true,
   ...props
 }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -108,12 +109,14 @@ export default function MultiSelectTagInput({
       <div className="relative" ref={dropdownRef}>
         {/* Tag input container */}
         <div className={"relative"}>
-          <HugeiconsIcon
-            icon={labelIcon}
-            ize={24}
-            strokeWidth={2}
-            className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-900"
-          />
+          {useLabelIcon && (
+            <HugeiconsIcon
+              icon={labelIcon}
+              ize={24}
+              strokeWidth={2}
+              className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-900"
+            />
+          )}
           <input
             ref={inputRef}
             type="text"
@@ -128,7 +131,7 @@ export default function MultiSelectTagInput({
                 ? `Search or add new ${label.toLowerCase()}`
                 : `Add more ${label.toLowerCase()}`
             }
-            className="w-full px-14 h-14 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 transition-all duration-300 delay-100 transition-colors"
+            className={clsx("w-full h-14 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 transition-all duration-300 delay-100 transition-colors", useLabelIcon ? "px-14":"px-4")}
             {...props}
           />
         </div>
@@ -225,7 +228,7 @@ export default function MultiSelectTagInput({
         )}
 
         {/* Selected tags */}
-        <div className="flex flex-wrap gap-2 mt-4">
+        <div className="flex flex-wrap gap-2 mt-4 max-h-32 overflow-y-auto">
           {value.map((tag) => (
             <span
               key={tag.id}

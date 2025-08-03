@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Calendar, ChevronLeft, ChevronRight, X } from "lucide-react";
+// import { Calendar, ChevronLeft, ChevronRight, X } from "lucide-react";
 
-export default function CalendarRange() {
+export default function CalendarRangeInput() {
   const [isOpen, setIsOpen] = useState(false);
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [departureDate, setDepartureDate] = useState(null);
@@ -173,7 +173,7 @@ export default function CalendarRange() {
             }`}
           >
             <div className="flex items-center">
-              <Calendar className="h-4 w-4 text-gray-400 mr-2" />
+              {/* <Calendar className="h-4 w-4 text-gray-400 mr-2" /> */}
               <div>
                 <div className="text-xs text-gray-500">Departure</div>
                 <div
@@ -199,7 +199,7 @@ export default function CalendarRange() {
             } ${!departureDate ? "opacity-50 cursor-not-allowed" : ""}`}
           >
             <div className="flex items-center">
-              <Calendar className="h-4 w-4 text-gray-400 mr-2" />
+              {/* <Calendar className="h-4 w-4 text-gray-400 mr-2" /> */}
               <div>
                 <div className="text-xs text-gray-500">Return</div>
                 <div
@@ -233,7 +233,7 @@ export default function CalendarRange() {
                 onClick={() => navigateMonth(-1)}
                 className="p-1 hover:bg-gray-100 rounded"
               >
-                <ChevronLeft className="h-5 w-5 text-gray-600" />
+                {/* <ChevronLeft className="h-5 w-5 text-gray-600" /> */}
               </button>
               <h3 className="text-lg font-semibold text-gray-900">
                 {monthYear}
@@ -242,7 +242,7 @@ export default function CalendarRange() {
                 onClick={() => navigateMonth(1)}
                 className="p-1 hover:bg-gray-100 rounded"
               >
-                <ChevronRight className="h-5 w-5 text-gray-600" />
+                {/* <ChevronRight className="h-5 w-5 text-gray-600" /> */}
               </button>
             </div>
 

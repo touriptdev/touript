@@ -10,8 +10,8 @@ import {
   SingleImageInput,
   TextAreaInput,
   TextInput,
-} from "../components/forms";
-import { ModalHeader } from "../layouts";
+} from "../../components/forms";
+import { ModalHeader } from "../../layouts";
 import {
   AppleIcon,
   UserLove01Icon,
@@ -247,7 +247,7 @@ export default function EditProfile({ onClose }) {
             </div>
           </div>
         </div>
-
+        {/* Contact Info */}
         <div className="flex flex-col items-center w-full py-4 gap-4">
           <div className="flex items-center text-base font-poppins font-medium w-full">
             Contact Information
@@ -406,7 +406,7 @@ export default function EditProfile({ onClose }) {
             </div>
           </div>
         </div>
-
+        {/* Places */}
         <div className="flex flex-col items-center w-full py-4 gap-4">
           <div className="flex items-center text-base font-poppins font-medium w-full">
             Places
@@ -482,7 +482,7 @@ export default function EditProfile({ onClose }) {
             </div>
           </div>
         </div>
-
+        {/* Interest */}
         <div className="flex flex-col items-center w-full py-4 gap-4">
           <div className="flex items-center text-base font-poppins font-medium w-full">
             Interests
@@ -511,7 +511,7 @@ export default function EditProfile({ onClose }) {
             </div> */}
           </div>
         </div>
-
+        {/* Social Links */}
         <div className="flex flex-col items-center w-full py-4 gap-4">
           <div className="flex items-center text-base font-poppins font-medium w-full">
             Social Links
@@ -542,7 +542,7 @@ export default function EditProfile({ onClose }) {
             </span>
           </button>
         </div>
-
+        {/* Button */}
         <div className="flex items-center justify-between w-full gap-4">
           <button
             // onClick={onBack}

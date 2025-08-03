@@ -12,6 +12,7 @@ export default function SearchSelect({
   onChange,
   value,
   labelIcon,
+  required = false,
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
@@ -91,6 +92,7 @@ export default function SearchSelect({
           <input
             ref={inputRef}
             type="text"
+            required={required}
             // value={searchTerm || (selectedOption ? selectedOption.label : "")}
             value={
               isOpen || searchTerm
@@ -172,8 +174,10 @@ export default function SearchSelect({
               </li>
             ) : !searchTerm && !selectedOption ? (
               <div className="h-full flex flex-col items-center w-full">
-                <span className="flex items-ceter justify-center text-gray-400 w-full py-4 border-b border-gray-200 text-sm">Start typing to search {label.toLowerCase()}</span>
-                
+                <span className="flex items-ceter justify-center text-gray-400 w-full py-4 border-b border-gray-200 text-sm">
+                  Start typing to search {label.toLowerCase()}
+                </span>
+
                 {filteredOptions.map((option, idx) => (
                   <li
                     key={option.value}

@@ -9,6 +9,7 @@ export default function TextAreaInput({
   value,
   onChange,
   maxLength,
+  placeholder = "Enter your message here...",
 }) {
   // const [isFocused, setIsFocused] = useState(false);
   const minRows = 2;
@@ -60,10 +61,11 @@ export default function TextAreaInput({
         onChange={handleTextChange}
         // onFocus={() => setIsFocused(true)}
         // onBlur={() => setIsFocused(false)}
-        placeholder="Enter your message here..."
+        placeholder={placeholder}
         rows={minRows}
         className={clsx(
-          "w-full px-14 py-4 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 transition-all duration-300 delay-150"
+          "w-full py-4 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 transition-all duration-300 delay-150",
+          useLabelIcon ? "px-14" : "px-4"
         )}
         style={{
           minHeight: `${minRows * 24}px`,

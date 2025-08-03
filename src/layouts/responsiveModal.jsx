@@ -22,8 +22,11 @@ export default function ResponsiveModal({ children, onClose }) {
 
       {isMobile ? (
         // Bottom Sheet Modal (Mobile)
-        <div className="absolute bottom-16 left-0 right-0 mx-auto w-full min-w-sm max-h-[84vh] rounded-t-2xl bg-white pt-4 pb-8 px-8 animate-slideUp overflow-y-auto no-scrollbar sm:hidden">
-          <div className="mb-2 h-1 w-9 bg-gray-200 rounded-full mx-auto" />
+        <div className="absolute bottom-16 left-0 right-0 mx-auto w-full min-w-sm max-h-[84vh] rounded-t-2xl bg-white  pb-8 px-8 animate-slideUp overflow-y-auto no-scrollbar sm:hidden">
+          {/* <div className="mb-2 h-1 w-9 bg-gray-200 rounded-full mx-auto" /> */}
+          <div className="sticky top-0 z-10 bg-white h-8 w-full flex items-center justify-center">
+            <div className="h-1 w-9 bg-gray-200 rounded-full mx-auto" />
+          </div>
           {children}
         </div>
       ) : (

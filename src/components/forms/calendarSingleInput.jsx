@@ -1,16 +1,37 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from "react";
 
-import { HugeiconsIcon } from '@hugeicons/react';
-import { ArrowDown01Icon, Calendar03Icon, CancelCircleIcon, CircleArrowRight01Icon, CircleArrowLeft01Icon } from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from "@hugeicons/react";
+import {
+  Calendar03Icon,
+  CancelCircleIcon,
+  CircleArrowRight01Icon,
+  CircleArrowLeft01Icon,
+} from "@hugeicons/core-free-icons";
 
-export default function CalendarSingleInput  () {
+export default function CalendarSingleInput({
+  label = "Select Date",
+  value,
+  onChange,
+  placeholder,
+  quickDate = true,
+}) {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(null);
+  // const [selectedDate, setSelectedDate] = useState(null);
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const calendarRef = useRef(null);
+  const [inputValue, setInputValue] = useState("");
 
   const today = new Date();
   today.setHours(0, 0, 0, 0);
+
+  useEffect(() => {
+    if (value) {
+      setInputValue(formatDate(value, "short"));
+      setCurrentMonth(value);
+    } else {
+      setInputValue("");
+    }
+  }, [value]);
 
   // Handle click outside to close calendar
   useEffect(() => {
@@ -20,8 +41,8 @@ export default function CalendarSingleInput  () {
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   // Get days in month
@@ -34,36 +55,36 @@ export default function CalendarSingleInput  () {
     const startingDayOfWeek = firstDay.getDay();
 
     const days = [];
-    
+
     // Add empty cells for days before the first day of month
     for (let i = 0; i < startingDayOfWeek; i++) {
       days.push(null);
     }
-    
+
     // Add all days of the month
     for (let day = 1; day <= daysCount; day++) {
       days.push(new Date(year, month, day));
     }
-    
+
     return days;
   };
 
-  const formatDate = (date, format = 'long') => {
-    if (!date) return '';
-    
-    if (format === 'long') {
-      return date.toLocaleDateString('en-US', {
-        weekday: 'long',
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
+  const formatDate = (date, format = "long") => {
+    if (!date) return "";
+
+    if (format === "long") {
+      return date.toLocaleDateString("en-US", {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
       });
     }
-    
-    return date.toLocaleDateString('en-US', {
-      month: 'short',
-      day: 'numeric',
-      year: 'numeric'
+
+    return date.toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
     });
   };
 
@@ -80,21 +101,21 @@ export default function CalendarSingleInput  () {
 
   const handleDateClick = (date) => {
     if (!date || date < minDate) return;
-    setSelectedDate(date);
+    // setSelectedDate(date);
+    if (onChange) onChange(date);
     setIsOpen(false);
   };
 
-  const handleInputClick = () => {
-    setIsOpen(!isOpen);
-  };
-
+  // Clear the month Selections
   const handleClear = (e) => {
     e.stopPropagation();
-    setSelectedDate(null);
+    // setSelectedDate(null);
+    if (onChange) onChange(null);
   };
 
+  // When arrow button is pressed for changing the months
   const navigateMonth = (direction) => {
-    setCurrentMonth(prev => {
+    setCurrentMonth((prev) => {
       const newMonth = new Date(prev);
       newMonth.setMonth(prev.getMonth() + direction);
       return newMonth;
@@ -103,214 +124,216 @@ export default function CalendarSingleInput  () {
 
   const goToToday = () => {
     setCurrentMonth(new Date());
-    setSelectedDate(today);
-    setIsOpen(false);
   };
 
+  // Style for Calendar Dates
   const getDayClassName = (date) => {
-    if (!date) return '';
-    
-    const baseClass = 'w-10 h-10 flex items-center justify-center text-sm cursor-pointer rounded-lg transition-colors relative';
-    
-    if (isSameDay(date, selectedDate)) {
-      return `${baseClass} bg-blue-600 text-white font-semibold`;
+    if (!date) return "";
+
+    const baseClass =
+      "w-11 h-11 flex items-center justify-center text-sm sm:text-base cursor-pointer rounded-lg transition-colors relative";
+
+    // if (isSameDay(date, selectedDate)) {
+    if (isSameDay(date, value)) {
+      return `${baseClass} bg-emerald-500 text-white font-semibold`;
     }
-    
+
     if (isToday(date)) {
-      return `${baseClass} bg-blue-100 text-blue-800 font-medium hover:bg-blue-200`;
+      return `${baseClass} bg-gray-50 text-gray-900 font-medium hover:bg-gray-100`;
     }
-    
+
     if (date < minDate) {
-      return `${baseClass} text-gray-300 cursor-not-allowed`;
+      return `${baseClass} text-gray-200 cursor-not-allowed`;
     }
-    
+
     return `${baseClass} hover:bg-gray-100 text-gray-900`;
   };
 
   const days = getDaysInMonth(currentMonth);
-  const monthYear = currentMonth.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+  const monthYear = currentMonth.toLocaleDateString("en-US", {
+    month: "long",
+    year: "numeric",
+  });
+
+  // useEffect(() => {
+  //   if (selectedDate) {
+  //     setInputValue(formatDate(selectedDate, "short"));
+  //   } else {
+  //     setInputValue("");
+  //   }
+  // }, [selectedDate]);
 
   return (
-    <div className="w-full max-w-md mx-auto p-8">
-      <label className="block text-sm font-medium text-gray-700 mb-2">
-        Select Date
-      </label>
-      
+    <div className="w-full">
+      <label className="sr-only">{label}</label>
+
       <div className="relative" ref={calendarRef}>
-        {/* Date input */}
-        <div
-          onClick={handleInputClick}
-          className={`relative w-full bg-white border rounded-lg px-3 py-3 pr-10 text-left cursor-pointer transition-colors ${
-            isOpen ? 'border-blue-500 ring-2 ring-blue-500' : 'border-gray-300 hover:border-gray-400'
-          }`}
-        >
-          <div className="flex items-center">
-            <HugeiconsIcon icon={Calendar03Icon} className="h-5 w-5 text-gray-400 mr-3" />
-            <div className="flex-1">
-              <div className={`text-sm ${selectedDate ? 'text-gray-900 font-medium' : 'text-gray-500'}`}>
-                {selectedDate ? formatDate(selectedDate, 'short') : 'Choose a date'}
-              </div>
-              {selectedDate && (
-                <div className="text-xs text-gray-500 mt-0.5">
-                  {formatDate(selectedDate, 'long')}
-                </div>
-              )}
-            </div>
+        {/* <div className="relative w-full" ref={calendarRef}> */}
+        <div className="relative w-full">
+          <div className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-900">
+            <HugeiconsIcon icon={Calendar03Icon} size={24} strokeWidth={2} />
           </div>
-          
-          {/* Clear button */}
-          {selectedDate && (
+
+          <input
+            id={label}
+            name={label}
+            type="text"
+            value={inputValue}
+            placeholder={placeholder}
+            onFocus={() => setIsOpen(true)}
+            onChange={(e) => setInputValue(e.target.value)}
+            onBlur={() => {
+              const parsed = new Date(inputValue);
+              if (!isNaN(parsed) && parsed >= minDate) {
+                if (onChange) onChange(parsed);
+                setCurrentMonth(parsed);
+              } else {
+                setInputValue(value ? formatDate(value, "short") : "");
+              }
+            }}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                const parsed = new Date(inputValue);
+                if (!isNaN(parsed) && parsed >= minDate) {
+                  // setSelectedDate(parsed);
+                  if (onChange) onChange(parsed);
+                  setCurrentMonth(parsed);
+                  setIsOpen(false);
+                }
+              }
+            }}
+            className="w-full h-14 px-14 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 transition-all duration-300 delay-100"
+          />
+          {/* {selectedDate && ( */}
+          {value && (
             <button
+              type="button"
               onClick={handleClear}
-              className="absolute inset-y-0 right-0 flex items-center pr-3 hover:text-gray-700 text-gray-400"
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-900 cursor-pointer"
             >
-              <HugeiconsIcon icon={CancelCircleIcon} className="h-4 w-4" />
+              <HugeiconsIcon
+                icon={CancelCircleIcon}
+                size={24}
+                strokeWidth={2}
+              />
             </button>
           )}
+          {/* </div> */}
         </div>
 
-        {/* Calendar dropdown */}
         {isOpen && (
-          <div className="absolute z-10 mt-1 bg-white shadow-lg rounded-lg border border-gray-200 p-4 w-80">
-            {/* Calendar header */}
+          <div className="absolute z-10 mt-2 bg-white shadow-lg rounded-lg border border-gray-200 px-4 py-4 sm:px-8 sm:py-8 w-full">
             <div className="flex items-center justify-between mb-4">
               <button
+                type="button"
                 onClick={() => navigateMonth(-1)}
-                className="p-1.5 hover:bg-gray-100 rounded-lg transition-colors"
+                className="h-11 w-11 flex items-center justify-center rounded-full text-gray-400 hover:text-gray-900 hover:bg-gray-100 transition-colors duration-300 delay-150 cursor-pointer"
               >
-                <HugeiconsIcon icon={CircleArrowLeft01Icon} className="h-5 w-5 text-gray-600" />
+                <HugeiconsIcon
+                  icon={CircleArrowLeft01Icon}
+                  size={24}
+                  strokeWidth={2}
+                />
               </button>
-              
-              <h3 className="text-lg font-semibold text-gray-900">{monthYear}</h3>
-              
+
+              <h3 className="text-base font-semibold text-gray-900">
+                {monthYear}
+              </h3>
+
               <button
+                type="button"
                 onClick={() => navigateMonth(1)}
-                className="p-1.5 hover:bg-gray-100 rounded-lg transition-colors"
+                className="h-11 w-11 flex items-center justify-center text-gray-400 hover:text-gray-900 rounded-full hover:bg-gray-100 transition-colors duration-300 delay-150 cursor-pointer"
               >
-                <HugeiconsIcon icon={CircleArrowRight01Icon} className="h-5 w-5 text-gray-600" />
+                <HugeiconsIcon
+                  icon={CircleArrowRight01Icon}
+                  size={24}
+                  strokeWidth={2}
+                />
               </button>
             </div>
 
             {/* Today button */}
-            <div className="flex justify-center mb-4">
-              <button
-                onClick={goToToday}
-                className="text-sm text-blue-600 hover:text-blue-700 font-medium"
-              >
-                Today
-              </button>
-            </div>
+            {(currentMonth.getMonth() !== today.getMonth() ||
+              currentMonth.getFullYear() !== today.getFullYear()) && (
+              <div className="flex justify-center mb-2">
+                <button
+                  type="button"
+                  onClick={goToToday}
+                  className="text-sm text-gray-400 hover:text-gray-900 font-medium cursor-pointer transition-colors duration-300 delay-150"
+                >
+                  Go to Today
+                </button>
+              </div>
+            )}
 
             {/* Calendar grid */}
-            <div className="grid grid-cols-7 gap-1 mb-2">
-              {['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'].map(day => (
-                <div key={day} className="h-10 flex items-center justify-center text-xs font-medium text-gray-500">
-                  {day}
-                </div>
-              ))}
-            </div>
-            
-            <div className="grid grid-cols-7 gap-1">
-              {days.map((date, index) => (
-                <div key={index} className="relative">
-                  {date && (
-                    <button
-                      onClick={() => handleDateClick(date)}
-                      disabled={date < minDate}
-                      className={getDayClassName(date)}
-                    >
-                      {date.getDate()}
-                      {isToday(date) && !isSameDay(date, selectedDate) && (
-                        <div className="absolute bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-blue-600 rounded-full"></div>
-                      )}
-                    </button>
-                  )}
-                </div>
-              ))}
-            </div>
+            <div className="sm:px-11">
+              <div className="grid grid-cols-7 gap-1 mb-2">
+                {["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"].map((day) => (
+                  <div
+                    key={day}
+                    className="h-11 flex items-center justify-center text-xs sm:text-sm font-medium text-gray-400"
+                  >
+                    {day}
+                  </div>
+                ))}
+              </div>
 
-            {/* Footer with legend */}
-            <div className="mt-4 flex items-center justify-center space-x-4 text-xs text-gray-500">
-              <div className="flex items-center">
-                <div className="w-3 h-3 bg-blue-600 rounded mr-1"></div>
-                Selected
-              </div>
-              <div className="flex items-center">
-                <div className="w-3 h-3 bg-blue-100 rounded mr-1"></div>
-                Today
-              </div>
-              <div className="flex items-center">
-                <div className="w-3 h-3 bg-gray-300 rounded mr-1"></div>
-                Before 2010
+              <div className="grid grid-cols-7 gap-2">
+                {days.map((date, index) => (
+                  <div
+                    key={index}
+                    className="relative h-11 flex items-center justify-center font-medium"
+                  >
+                    {date && (
+                      <button
+                        type="button"
+                        onClick={() => handleDateClick(date)}
+                        disabled={date < minDate}
+                        className={getDayClassName(date)}
+                      >
+                        {date.getDate()}
+                        {/* {isToday(date) && !isSameDay(date, selectedDate) && ( */}
+                        {isToday(date) && !isSameDay(date, value) && (
+                          <div className="absolute bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-emerald-500 rounded-full"></div>
+                        )}
+                      </button>
+                    )}
+                  </div>
+                ))}
               </div>
             </div>
           </div>
         )}
       </div>
 
-      {/* Selected date display */}
-      {selectedDate && (
-        <div className="mt-4 p-4 bg-gray-50 rounded-lg">
-          <h4 className="text-sm font-medium text-gray-700 mb-1">Selected Date:</h4>
-          <p className="text-lg font-semibold text-gray-900">{formatDate(selectedDate, 'long')}</p>
-          <p className="text-sm text-gray-500 mt-1">
-            {selectedDate < today ? 
-             `${Math.ceil((today - selectedDate) / (1000 * 60 * 60 * 24))} days ago` : 
-             isToday(selectedDate) ? 'Today' : 
-             `${Math.ceil((selectedDate - today) / (1000 * 60 * 60 * 24))} days from now`}
-          </p>
+      {/* Quick date options */}
+      {quickDate && (
+        <div className="mt-2">
+          <div className="flex gap-4 items-center overflow-x-auto h-14 px-4 py-1">
+            {["Today", "Yesterday", "Last Week", "Last Month"].map((label) => (
+              <button
+                key={label}
+                type="button"
+                onClick={() => {
+                  let date = new Date(today);
+                  if (label === "Yesterday") date.setDate(today.getDate() - 1);
+                  if (label === "Last Week") date.setDate(today.getDate() - 7);
+                  if (label === "Last Month")
+                    date.setMonth(today.getMonth() - 1);
+                  // setSelectedDate(date);
+                  if (onChange) onChange(date);
+                  setIsOpen(false);
+                }}
+                className="w-full px-4 h-11 text-sm font-medium bg-gray-50 text-gray-900 rounded-lg border border-gray-200 hover:ring-2 hover:ring-gray-900 hover:bg-white transition-all transition-colors duration-300 delay-150 cursor-pointer"
+              >
+                <span className="whitespace-nowrap">{label}</span>
+              </button>
+            ))}
+          </div>
         </div>
       )}
-
-      {/* Quick date options */}
-      <div className="mt-4">
-        <p className="text-sm font-medium text-gray-700 mb-2">Quick Select:</p>
-        <div className="flex flex-wrap gap-2">
-          <button
-            onClick={() => {
-              setSelectedDate(today);
-              setIsOpen(false);
-            }}
-            className="px-3 py-1.5 text-xs bg-blue-100 text-blue-700 rounded-lg hover:bg-blue-200 transition-colors"
-          >
-            Today
-          </button>
-          <button
-            onClick={() => {
-              const yesterday = new Date(today);
-              yesterday.setDate(today.getDate() - 1);
-              setSelectedDate(yesterday);
-              setIsOpen(false);
-            }}
-            className="px-3 py-1.5 text-xs bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors"
-          >
-            Yesterday
-          </button>
-          <button
-            onClick={() => {
-              const lastWeek = new Date(today);
-              lastWeek.setDate(today.getDate() - 7);
-              setSelectedDate(lastWeek);
-              setIsOpen(false);
-            }}
-            className="px-3 py-1.5 text-xs bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors"
-          >
-            Last Week
-          </button>
-          <button
-            onClick={() => {
-              const lastMonth = new Date(today);
-              lastMonth.setMonth(today.getMonth() - 1);
-              setSelectedDate(lastMonth);
-              setIsOpen(false);
-            }}
-            className="px-3 py-1.5 text-xs bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors"
-          >
-            Last Month
-          </button>
-        </div>
-      </div>
     </div>
   );
-};
-
+}

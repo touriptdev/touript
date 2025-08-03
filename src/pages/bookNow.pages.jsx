@@ -254,7 +254,7 @@ import Menu1 from "./menu1";
 import Menu2 from "./menu2";
 import { SlideWrapper } from "./slideWrapper";
 import { ResponsiveModal } from "../layouts";
-import EditProfile from "./editProfile.pages";
+import { EditProfile, WritePostReviewRecom } from "./modal";
 
 export default function BookNow() {
   const tabs = [
@@ -297,10 +297,10 @@ export default function BookNow() {
 
   const tabRefs = useRef([]);
   const menuRefs = useRef([]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [openModal, setOpenModal] = useState(null);
 
-  const toggleModal = () => {
-    setIsModalOpen((prev) => !prev);
+  const toggleModal = (modalType) => {
+    setOpenModal((prev) => (prev === modalType ? null : modalType));
   };
 
   // Handle click outside
@@ -358,7 +358,7 @@ export default function BookNow() {
 
   return (
     <div>
-      <div className="flex items-center justify-center">
+      <div className="flex items-center justify-center ">
         <div
           className={clsx(
             "max-w-5xl  h-22 relative flex items-center justify-center px-1 py-1 rounded-lg border border-gray-100",
@@ -466,13 +466,20 @@ export default function BookNow() {
         </div>
       </div>
 
-      <button onClick={toggleModal}>Edit Profile</button>
+      <div className="flex items-center gap-8 cursor-pointer">
+        <button onClick={() => toggleModal("edit")}>Edit Profile</button>
+        <button onClick={() => toggleModal("write")}>Write</button>
+      </div>
 
-      
+      {openModal === "edit" && (
+        <ResponsiveModal onClose={() => setOpenModal(null)}>
+          <EditProfile onClose={() => setOpenModal(null)} />
+        </ResponsiveModal>
+      )}
 
-      {isModalOpen && (
-        <ResponsiveModal onClose={toggleModal}>
-          <EditProfile onClose={toggleModal} />
+      {openModal === "write" && (
+        <ResponsiveModal onClose={() => setOpenModal(null)}>
+          <WritePostReviewRecom onClose={() => setOpenModal(null)} />
         </ResponsiveModal>
       )}
     </div>

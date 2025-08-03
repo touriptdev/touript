@@ -116,7 +116,7 @@ export default function MultiImagesInput({
 
   return (
     <div className="w-full font-poppins">
-      <div className="flex flex-col items-center justify-center w-full min-w-sm h-full text-center rounded-lg border-2 border-dashed border-gray-200 px-4 py-4">
+      <div className="flex flex-col items-center justify-center w-full h-full text-center rounded-lg border-2 border-dashed border-gray-200 px-4 py-4">
         <div className="text-base lg:text-sm text-gray-900 w-full">
           {/* label is button here */}
           <label
