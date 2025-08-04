@@ -74,7 +74,7 @@ export default function WritePostReviewRecom({ onClose }) {
   return (
     <div className="w-full font-poppins">
       {/* Header */}
-      <ModalHeader title="Write/Ask" onClose={onClose} />
+      <ModalHeader title="Compose" onClose={onClose} />
       {/* Tab Navigation */}
       <div
         className={clsx(

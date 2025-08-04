@@ -55,7 +55,7 @@ function HeaderLarge() {
 
   return (
     <div>
-      <div className="hidden lg:flex items-center justify-between relative px-8 ">
+      <div className="hidden lg:flex items-center justify-between bg-gray-50 relative px-8 py-4 ">
         {/* Logo */}
         <Link
           to="/"
