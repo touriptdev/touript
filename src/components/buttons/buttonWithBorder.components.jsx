@@ -44,8 +44,6 @@
 //   );
 // }
 
-
-
 import { HugeiconsIcon } from "@hugeicons/react";
 import { Link, NavLink } from "react-router-dom";
 
@@ -75,7 +73,9 @@ export default function ButtonWithBorder({
           `${baseClass} ${isActive ? activeClass : inactiveClass}`
         }
       >
-        {iconName && <HugeiconsIcon icon={iconName} size={24} strokeWidth={2} />}
+        {iconName && (
+          <HugeiconsIcon icon={iconName} size={24} strokeWidth={2} />
+        )}
         <span>{iconText}</span>
       </NavLink>
     );
@@ -88,4 +88,3 @@ export default function ButtonWithBorder({
     </Link>
   );
 }
-

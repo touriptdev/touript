@@ -1,6 +1,10 @@
 // cropImageUtils.js
 export default function getCroppedImg(imageSrc, pixelCrop, options = {}) {
-  const { imgDimention = 264, mimeType = "image/jpeg", originalFileName = "image", } = options;
+  const {
+    imgDimention = 264,
+    mimeType = "image/jpeg",
+    originalFileName = "image",
+  } = options;
 
   return new Promise((resolve, reject) => {
     const image = new Image();
@@ -10,7 +14,7 @@ export default function getCroppedImg(imageSrc, pixelCrop, options = {}) {
       const cropSize = Math.min(
         pixelCrop.width,
         pixelCrop.height,
-        imgDimention
+        imgDimention,
       );
 
       const canvas = document.createElement("canvas");
@@ -28,7 +32,7 @@ export default function getCroppedImg(imageSrc, pixelCrop, options = {}) {
         0,
         0,
         cropSize,
-        cropSize
+        cropSize,
       );
 
       // canvas.toBlob((blob) => {
@@ -60,7 +64,7 @@ export default function getCroppedImg(imageSrc, pixelCrop, options = {}) {
           const ext = mimeType.split("/")[1];
           const fileName = `${originalFileName.replace(
             /\.[^/.]+$/,
-            ""
+            "",
           )}-${Date.now()}.${ext}`;
 
           const file = new File([blob], fileName, {
@@ -72,7 +76,7 @@ export default function getCroppedImg(imageSrc, pixelCrop, options = {}) {
           resolve({ file, previewUrl });
         },
         mimeType,
-        1
+        1,
       );
     };
     image.onerror = () => reject("Failed to load image");

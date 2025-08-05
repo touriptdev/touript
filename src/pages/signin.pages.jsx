@@ -1,7 +1,12 @@
 import { HugeiconsIcon } from "@hugeicons/react";
 import { CancelCircleIcon } from "@hugeicons/core-free-icons";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { CheckboxInput, EmailInput, EnterCode, PasswordInput } from "../components/forms";
+import {
+  CheckboxInput,
+  EmailInput,
+  EnterCode,
+  PasswordInput,
+} from "../components/forms";
 import { useState } from "react";
 
 export default function SignIn() {
@@ -163,7 +168,6 @@ export default function SignIn() {
             Privacy Policy
           </Link>
         </div>
-
       </main>
     </div>
   );

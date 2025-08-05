@@ -55,7 +55,7 @@ export default function RadioInput({
               isChecked
                 ? "bg-white text-gray-900 ring-2 ring-gray-900 "
                 : "bg-gray-50 text-gray-900",
-              isDisabled ? "opacity-50 cursor-not-allowed" : ""
+              isDisabled ? "opacity-50 cursor-not-allowed" : "",
             )}
           >
             {/* <div className="flex items-center"> */}
@@ -66,7 +66,7 @@ export default function RadioInput({
 
                 isChecked
                   ? "border-gray-900 bg-gray-900"
-                  : "border-gray-200 hover:border-gray-900"
+                  : "border-gray-200 hover:border-gray-900",
               )}
             >
               {isChecked && (
@@ -111,7 +111,7 @@ export default function RadioInput({
               isChecked
                 ? "bg-white text-gray-900 ring-2 ring-gray-900 "
                 : "bg-gray-50 text-gray-900",
-              isDisabled ? "opacity-50 cursor-not-allowed" : ""
+              isDisabled ? "opacity-50 cursor-not-allowed" : "",
             )}
           >
             {optionIcon && (
@@ -142,7 +142,7 @@ export default function RadioInput({
           className={clsx(
             "flex items-center cursor-pointer gap-4 font-poppins text-base font-medium w-full",
             optionDescription ? "h-14" : "h-8",
-            isDisabled ? "opacity-50 cursor-not-allowed" : ""
+            isDisabled ? "opacity-50 cursor-not-allowed" : "",
           )}
         >
           <div
@@ -152,7 +152,7 @@ export default function RadioInput({
 
               isChecked
                 ? "border-gray-900 bg-gray-900"
-                : "border-gray-200 hover:border-gray-900"
+                : "border-gray-200 hover:border-gray-900",
             )}
           >
             {isChecked && (
@@ -185,7 +185,7 @@ export default function RadioInput({
         className={clsx(
           direction === "horizontal"
             ? "flex flex-wrap gap-4 w-full"
-            : "space-y-4"
+            : "space-y-4",
         )}
       >
         {options.map(renderOption)}

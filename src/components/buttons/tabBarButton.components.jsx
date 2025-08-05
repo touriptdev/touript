@@ -6,8 +6,7 @@ export default function TabBarButton({ iconName, iconText, iconLink }) {
     "flex flex-col items-center justify-center h-full py-2 gap-2 transition-all delay-150 duration-300 font-poppins";
 
   const activeClass = "text-emerald-500 ";
-  const inactiveClass =
-    "text-gray-500   hover:text-emerald-500 ";
+  const inactiveClass = "text-gray-500   hover:text-emerald-500 ";
   return (
     <NavLink
       to={iconLink}

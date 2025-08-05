@@ -180,7 +180,7 @@ export default function PrivacyDropdownSelect({
                 }}
                 className={clsx(
                   "flex items-center gap-4 px-4 py-3 cursor-pointer hover:bg-gray-100 text-gray-900 transition duration-200",
-                  isSelected && "font-medium bg-gray-50"
+                  isSelected && "font-medium bg-gray-50",
                 )}
               >
                 <HugeiconsIcon icon={opt.icon} size={24} strokeWidth={2} />

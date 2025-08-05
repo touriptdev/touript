@@ -23,7 +23,7 @@ function HeaderLarge() {
   useEffect(() => {
     const updateIndicator = () => {
       const desktopIndex = navItems.findIndex(
-        (item) => location.pathname === item.link
+        (item) => location.pathname === item.link,
       );
       const desktopEl = desktopNavRefs.current[desktopIndex];
       if (desktopEl) {
@@ -106,8 +106,9 @@ function HeaderLarge() {
           </button>
 
           {/* Person Image Area [Login]*/}
-          <button className="w-14 h-14 bg-transparent border-2 border-gray-200 rounded-full flex items-center justify-center cursor-pointer"
-          onClick={() =>
+          <button
+            className="w-14 h-14 bg-transparent border-2 border-gray-200 rounded-full flex items-center justify-center cursor-pointer"
+            onClick={() =>
               navigate("/signin", {
                 state: { backgroundLocation: location },
               })

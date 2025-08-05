@@ -95,7 +95,6 @@ export default function AppRoutes({ backgroundLocation }) {
         />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
-
     </>
   );
 }

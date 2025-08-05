@@ -21,7 +21,7 @@ export default function SearchSelect({
 
   const selectedOption = options.find((opt) => opt.value === value) || null;
   const filteredOptions = options.filter((option) =>
-    option.label.toLowerCase().includes(searchTerm.toLowerCase())
+    option.label.toLowerCase().includes(searchTerm.toLowerCase()),
   );
 
   // Handle click outside to close dropdown
@@ -98,8 +98,8 @@ export default function SearchSelect({
               isOpen || searchTerm
                 ? searchTerm
                 : selectedOption
-                ? selectedOption.label
-                : ""
+                  ? selectedOption.label
+                  : ""
             }
             onChange={handleSearchChange}
             onFocus={() => setIsOpen(true)}
@@ -112,7 +112,7 @@ export default function SearchSelect({
               "w-full px-14 h-14 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 transition-all duration-300 delay-100 transition-colors",
               selectedOption && !searchTerm
                 ? "text-gray-900 font-medium text-base lg:text-sm"
-                : "text-gray-700"
+                : "text-gray-700",
             )}
           />
 
@@ -143,7 +143,7 @@ export default function SearchSelect({
                     value === option.value ? "font-medium" : "",
                     idx === filteredOptions.length - 1
                       ? "border-none"
-                      : "border-b border-gray-200"
+                      : "border-b border-gray-200",
                   )}
                 >
                   <div className="flex items-center justify-start gap-4">
@@ -154,13 +154,13 @@ export default function SearchSelect({
                       className={clsx(
                         value === option.value
                           ? "text-gray-900"
-                          : "text-transparent"
+                          : "text-transparent",
                       )}
                     />
                     <span
                       className={clsx(
                         "block truncate",
-                        value === option.value ? "font-medium" : "font-normal"
+                        value === option.value ? "font-medium" : "font-normal",
                       )}
                     >
                       {option.label}
@@ -189,7 +189,7 @@ export default function SearchSelect({
                       value === option.value ? "font-medium" : "",
                       idx === filteredOptions.length - 1
                         ? "border-none"
-                        : "border-b border-gray-200"
+                        : "border-b border-gray-200",
                     )}
                   >
                     <div className="flex items-center justify-start gap-4">
@@ -200,13 +200,15 @@ export default function SearchSelect({
                         className={clsx(
                           value === option.value
                             ? "text-gray-900"
-                            : "text-transparent"
+                            : "text-transparent",
                         )}
                       />
                       <span
                         className={clsx(
                           "block truncate",
-                          value === option.value ? "font-medium" : "font-normal"
+                          value === option.value
+                            ? "font-medium"
+                            : "font-normal",
                         )}
                       >
                         {option.label}

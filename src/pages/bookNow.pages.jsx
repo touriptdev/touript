@@ -324,7 +324,7 @@ export default function BookNow() {
     if (!el) return;
 
     const observer = new ResizeObserver(() =>
-      setPopoverHeight(el.offsetHeight)
+      setPopoverHeight(el.offsetHeight),
     );
     observer.observe(el);
     setPopoverHeight(el.offsetHeight); // Set initial height
@@ -343,7 +343,7 @@ export default function BookNow() {
     const tabCenter = tabRect.left - parentRect.left + tabRect.width / 2;
     const menuLeft = Math.max(
       0,
-      Math.min(tabCenter - menuWidth / 2, parentRect.width - menuWidth)
+      Math.min(tabCenter - menuWidth / 2, parentRect.width - menuWidth),
     );
 
     setHoverRect({
@@ -364,7 +364,7 @@ export default function BookNow() {
             "max-w-5xl  h-22 relative flex items-center justify-center px-1 py-1 rounded-lg border border-gray-100",
             active !== null
               ? "bg-gray-50 shadow-none"
-              : "bg-white shadow-xl shadow-gray-200"
+              : "bg-white shadow-xl shadow-gray-200",
           )}
         >
           {tabs.map((tab, idx) => (
@@ -375,7 +375,7 @@ export default function BookNow() {
               className={clsx(
                 "z-1 px-4 h-full min-w-57 font-poppins relative flex items-center cursor-pointer rounded-lg hover:bg-gray-100",
                 idx === 3 ? "pr-20" : "",
-                active === idx && "hover:bg-transparent"
+                active === idx && "hover:bg-transparent",
               )}
             >
               <div className="flex items-center gap-2">

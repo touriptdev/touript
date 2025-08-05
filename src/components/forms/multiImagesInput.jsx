@@ -211,7 +211,7 @@ export default function MultiImagesInput({
             "transition-all duration-300",
             isAutoCropping
               ? "opacity-0 scale-90 pointer-events-none absolute top-0 left-0 w-full h-full invisible"
-              : "opacity-100 scale-100 visible relative"
+              : "opacity-100 scale-100 visible relative",
           )}
           style={{ transitionProperty: "opacity, transform" }}
         >

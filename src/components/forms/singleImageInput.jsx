@@ -189,7 +189,7 @@ function MultiFileInput({
     if (value && value.length !== croppedImages.length) {
       setCroppedImages(value);
     }
-  }, [value,croppedImages]);
+  }, [value, croppedImages]);
 
   const handleFileChange = (e) => {
     const selectedFiles = Array.from(e.target.files);
@@ -296,7 +296,6 @@ function MultiFileInput({
         <p className="text-xs text-gray-400 font-medium">
           JPG, JPEG, PNG up to 5MB
         </p>
-        
       </div>
 
       {alert && <p className="text-xs text-pink-500 mt-2">{alert}</p>}
@@ -375,4 +374,3 @@ function MultiFileInput({
     </div>
   );
 }
-

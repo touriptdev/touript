@@ -37,7 +37,7 @@ export default function CheckboxInput({
   const handleSelectAll = (checked) => {
     if (checked) {
       const allValues = options.map((option) =>
-        typeof option === "object" ? option.value : option
+        typeof option === "object" ? option.value : option,
       );
       onChange && onChange(allValues);
     } else {
@@ -150,7 +150,7 @@ export default function CheckboxInput({
               isChecked
                 ? "bg-white text-gray-900 ring-2 ring-gray-900 "
                 : "bg-gray-50 text-gray-900",
-              isDisabled ? "opacity-50 cursor-not-allowed" : ""
+              isDisabled ? "opacity-50 cursor-not-allowed" : "",
             )}
           >
             <div
@@ -159,7 +159,7 @@ export default function CheckboxInput({
                 "border-2 rounded-md flex items-center justify-center transition-all duration-200",
                 isChecked
                   ? "border-gray-900 bg-gray-900"
-                  : "border-gray-200 hover:border-gray-900"
+                  : "border-gray-200 hover:border-gray-900",
               )}
             >
               {isChecked && <CheckIcon />}
@@ -200,11 +200,12 @@ export default function CheckboxInput({
               isChecked
                 ? "bg-white text-gray-900 ring-2 ring-gray-900 "
                 : "bg-gray-50 text-gray-900",
-              isDisabled ? "opacity-50 cursor-not-allowed" : ""
+              isDisabled ? "opacity-50 cursor-not-allowed" : "",
             )}
           >
-            {optionIcon && 
-            <HugeiconsIcon icon={optionIcon} size={24} strokeWidth={2} />}
+            {optionIcon && (
+              <HugeiconsIcon icon={optionIcon} size={24} strokeWidth={2} />
+            )}
             {optionLabel}
           </label>
         </div>
@@ -228,7 +229,7 @@ export default function CheckboxInput({
           className={clsx(
             "flex items-center cursor-pointer gap-4 font-poppins text-base font-medium w-full",
             optionDescription ? "h-14" : "h-8",
-            isDisabled ? "opacity-50 cursor-not-allowed" : ""
+            isDisabled ? "opacity-50 cursor-not-allowed" : "",
           )}
         >
           <div
@@ -237,7 +238,7 @@ export default function CheckboxInput({
               "border-2 rounded-md flex items-center justify-center transition-all duration-200",
               isChecked
                 ? "border-gray-900 bg-gray-900"
-                : "border-gray-200 hover:border-gray-900"
+                : "border-gray-200 hover:border-gray-900",
             )}
           >
             {isChecked && <CheckIcon />}
@@ -265,7 +266,9 @@ export default function CheckboxInput({
 
       <div
         className={clsx(
-          direction === "horizontal" ? "flex flex-wrap gap-4 w-full" : "space-y-4"
+          direction === "horizontal"
+            ? "flex flex-wrap gap-4 w-full"
+            : "space-y-4",
         )}
       >
         {/* Select All option */}
@@ -283,7 +286,7 @@ export default function CheckboxInput({
               htmlFor={`${name}-select-all`}
               className={clsx(
                 "flex items-center cursor-pointer",
-                disabled ? "opacity-50 cursor-not-allowed" : ""
+                disabled ? "opacity-50 cursor-not-allowed" : "",
               )}
             >
               <div
@@ -292,7 +295,7 @@ export default function CheckboxInput({
                   "border-2 rounded mr-3 flex items-center justify-center transition-all duration-200",
                   isAllSelected || isSomeSelected
                     ? "border-gray-900 bg-gray-900"
-                    : "border-gray-200 hover:border-gray-900 transition-colors duration-200"
+                    : "border-gray-200 hover:border-gray-900 transition-colors duration-200",
                 )}
               >
                 {isAllSelected && <CheckIcon />}

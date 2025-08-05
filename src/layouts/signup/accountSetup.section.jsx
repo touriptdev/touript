@@ -32,7 +32,7 @@ export default function AccountSetup({
     e.preventDefault();
     onNext();
   };
-  
+
   return (
     <div className="flex flex-col items-center justify-center w-full">
       {/* Header*/}
@@ -64,7 +64,7 @@ export default function AccountSetup({
             labelIcon={User02Icon}
             placeholderText="First Name"
             autocomplete="given-name"
-            />
+          />
           <TextInput
             label="lastname"
             value={lastname}

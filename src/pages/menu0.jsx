@@ -7,7 +7,7 @@ const Menu0 = forwardRef((props, ref) => {
       <span className="text-xl">What to do</span>
       <div className="flex items-center justify-between gap-8">
         <div>
-          <AirportForm/>
+          <AirportForm />
           <label>
             <input name="myInput" placeholder="Enter Email" />
           </label>

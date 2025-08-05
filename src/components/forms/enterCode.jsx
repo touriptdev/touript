@@ -83,7 +83,7 @@ export default function EnterCode({ callback, reset, isLoading }) {
     if ((e.keyCode === 8 || e.keyCode === 46) && input.value === "") {
       e.preventDefault();
       setCode(
-        (prevCode) => prevCode.slice(0, index) + prevCode.slice(index + 1)
+        (prevCode) => prevCode.slice(0, index) + prevCode.slice(index + 1),
       );
       if (previousInput) {
         previousInput.current.focus();
@@ -107,14 +107,12 @@ export default function EnterCode({ callback, reset, isLoading }) {
   return (
     <div className="flex flex-col items-center">
       <div className="flex items-center justify-end w-full h-8">
-          {/* Clear button deletes all inputs and selects the first input for entry */}
+        {/* Clear button deletes all inputs and selects the first input for entry */}
         {code.length > 0 && (
-          <button
-            onClick={resetCode}
-          >
+          <button onClick={resetCode}>
             <span className="underline text-md font-poppins font-medium text-gray-700 cursor-pointer">
-                Clear Code
-              </span>
+              Clear Code
+            </span>
           </button>
         )}
       </div>

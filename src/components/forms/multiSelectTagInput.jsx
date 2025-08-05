@@ -131,7 +131,10 @@ export default function MultiSelectTagInput({
                 ? `Search or add new ${label.toLowerCase()}`
                 : `Add more ${label.toLowerCase()}`
             }
-            className={clsx("w-full h-14 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 transition-all duration-300 delay-100 transition-colors", useLabelIcon ? "px-14":"px-4")}
+            className={clsx(
+              "w-full h-14 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 transition-all duration-300 delay-100 transition-colors",
+              useLabelIcon ? "px-14" : "px-4",
+            )}
             {...props}
           />
         </div>
@@ -155,7 +158,7 @@ export default function MultiSelectTagInput({
                         onClick={() => handleSelectOption(option)}
                         className={clsx(
                           "px-4 py-4 cursor-pointer hover:bg-gray-100 text-gray-900 border-b border-gray-200 transition-all duration-300 delay-150",
-                          value === option.value ? "font-medium" : ""
+                          value === option.value ? "font-medium" : "",
                         )}
                       >
                         <div className="flex items-center justify-start gap-4">
@@ -166,7 +169,7 @@ export default function MultiSelectTagInput({
                             className={clsx(
                               value === option.value
                                 ? "text-gray-900"
-                                : "text-transparent"
+                                : "text-transparent",
                             )}
                           />
                           <span
@@ -174,7 +177,7 @@ export default function MultiSelectTagInput({
                               "block truncate",
                               value === option.value
                                 ? "font-medium"
-                                : "font-normal"
+                                : "font-normal",
                             )}
                           >
                             {option.label}
@@ -200,7 +203,7 @@ export default function MultiSelectTagInput({
                     setIsOpen(false);
                   }}
                   className={clsx(
-                    "px-4 py-4 cursor-pointer hover:bg-gray-100 text-gray-900 transition-all duration-300 delay-150 font-medium"
+                    "px-4 py-4 cursor-pointer hover:bg-gray-100 text-gray-900 transition-all duration-300 delay-150 font-medium",
                   )}
                 >
                   <div className="flex items-center justify-start gap-4">

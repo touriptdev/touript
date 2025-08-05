@@ -81,7 +81,7 @@ export default function WritePostReviewRecom({ onClose }) {
           "w-full h-20 sm:h-18 relative flex items-center justify-start px-1 py-1 border border-gray-100",
           active !== null
             ? "bg-gray-50 shadow-none"
-            : "bg-white shadow-xl shadow-gray-200"
+            : "bg-white shadow-xl shadow-gray-200",
         )}
       >
         {writeTabs.map((tab, idx) => (
@@ -91,7 +91,7 @@ export default function WritePostReviewRecom({ onClose }) {
             ref={(el) => (tabRefs.current[idx] = el)}
             className={clsx(
               "flex items-center justify-center z-1 px-4 h-full w-full font-poppins relative  cursor-pointer rounded-lg gap-2 hover:bg-gray-100",
-              active === idx && "hover:bg-transparent"
+              active === idx && "hover:bg-transparent",
             )}
           >
             <div className="flex flex-col sm:flex-row items-center gap-2 transition-all duration-300 delay-150">
@@ -101,13 +101,13 @@ export default function WritePostReviewRecom({ onClose }) {
                 strokeWidth={2}
                 className={clsx(
                   "transition-all duration-300 delay-150",
-                  active === idx ? "text-gray-900" : "text-gray-400"
+                  active === idx ? "text-gray-900" : "text-gray-400",
                 )}
               />
               <span
                 className={clsx(
                   "text-sm sm:text-base font-medium transition-all duration-300 delay-150",
-                  active === idx ? "text-gray-900" : "text-gray-400"
+                  active === idx ? "text-gray-900" : "text-gray-400",
                 )}
               >
                 {tab.Text}

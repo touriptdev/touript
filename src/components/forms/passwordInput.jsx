@@ -6,7 +6,12 @@ import {
   ViewOffSlashIcon,
 } from "@hugeicons/core-free-icons";
 
-export default function PasswordInput({ label = "password", placeholderText = "Password", value, onChange }) {
+export default function PasswordInput({
+  label = "password",
+  placeholderText = "Password",
+  value,
+  onChange,
+}) {
   const [showPassword, setShowPassword] = useState(false);
 
   const toggleVisibility = () => setShowPassword((prev) => !prev);

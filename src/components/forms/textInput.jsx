@@ -14,7 +14,7 @@ export default function TextInput({
   unique = false,
   autocomplete = "",
   useLabelIcon = true,
-  required=false,
+  required = false,
 }) {
   //   const [query, setQuery] = useState("");
   return (
@@ -41,7 +41,10 @@ export default function TextInput({
         onChange={onChange}
         autoComplete={autocomplete}
         required={required}
-        className={clsx("w-full h-14 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 transition-all duration-300 delay-100", useLabelIcon ? "px-14":"px-4")}
+        className={clsx(
+          "w-full h-14 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 transition-all duration-300 delay-100",
+          useLabelIcon ? "px-14" : "px-4",
+        )}
       />
 
       {/* Trailing icon (Clear button) */}

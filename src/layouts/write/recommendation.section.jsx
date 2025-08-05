@@ -50,7 +50,9 @@ export default function RecommendationSection() {
     >
       {/* Title & Subtitle */}
       <div className="flex flex-col items-start justify-start w-full ">
-        <span className="text-lg font-medium text-gray-900">Ask a recommendation</span>
+        <span className="text-lg font-medium text-gray-900">
+          Ask a recommendation
+        </span>
         <span className="text-base font-normal text-gray-500">
           Share your thoughts to get recommendation
         </span>
@@ -101,8 +103,6 @@ export default function RecommendationSection() {
           />
         </div>
       </div>
-
-      
 
       {/* Tags */}
       <div className="flex flex-col items-center w-full py-4 gap-4">

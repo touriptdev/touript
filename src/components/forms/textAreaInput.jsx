@@ -31,7 +31,7 @@ export default function TextAreaInput({
     const lineHeight = 24;
     const rows = Math.min(
       Math.max(Math.ceil(scrollHeight / lineHeight), minRows),
-      maxRows
+      maxRows,
     );
     textarea.style.height = `${rows * lineHeight}px`;
   };
@@ -65,7 +65,7 @@ export default function TextAreaInput({
         rows={minRows}
         className={clsx(
           "w-full py-4 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 transition-all duration-300 delay-150",
-          useLabelIcon ? "px-14" : "px-4"
+          useLabelIcon ? "px-14" : "px-4",
         )}
         style={{
           minHeight: `${minRows * 24}px`,
@@ -82,8 +82,8 @@ export default function TextAreaInput({
             isOverLimit
               ? "text-pink-500"
               : isNearLimit
-              ? "text-yellow-500"
-              : "text-gray-900"
+                ? "text-yellow-500"
+                : "text-gray-900"
           }`}
         >
           {remainingChars}

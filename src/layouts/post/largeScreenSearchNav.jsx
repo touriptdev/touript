@@ -35,7 +35,7 @@ export default function LargeScreenSearchNav() {
     <section
       className={clsx(
         "sticky top-0 z-10 font-poppins bg-gray-50 pt-4 pb-8 transition-all duration-300 delay-50",
-        isScrolled ? "w-2xl" : "w-full"
+        isScrolled ? "w-2xl" : "w-full",
       )}
     >
       <div className="flex items-center justify-center w-full gap-8">
@@ -44,7 +44,7 @@ export default function LargeScreenSearchNav() {
           onClick={() => setIsScrolled(false)}
           className={clsx(
             "flex items-center justify-start bg-white transition-all duration-300",
-            isScrolled ? "w-lg" : "w-2xl"
+            isScrolled ? "w-lg" : "w-2xl",
           )}
         >
           <SearchSelect

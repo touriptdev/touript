@@ -3,9 +3,7 @@ import { useState } from "react";
 import Fuse from "fuse.js";
 import airportData from "../utils/airports.json";
 
-const airportList = Object.values(airportData).filter(
-  (a) => a.name && a.city 
-);
+const airportList = Object.values(airportData).filter((a) => a.name && a.city);
 
 const fuse = new Fuse(airportList, {
   keys: ["city", "name", "iata"],
@@ -57,7 +55,7 @@ export default function AirportForm() {
               origin.lat,
               origin.lon,
               airport.lat,
-              airport.lon
+              airport.lon,
             );
             return {
               ...airport,
@@ -87,7 +85,10 @@ export default function AirportForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex items-center  gap-2 p-4 space-y-4">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="flex items-center  gap-2 p-4 space-y-4"
+    >
       {["departure", "return"].map((field) => (
         <Controller
           key={field}
@@ -108,7 +109,7 @@ export default function AirportForm() {
                 className="border px-3 py-2 w-full"
               />
               {activeField === field && suggestions.length > 0 && (
-            //   {suggestions.length > 0 && (
+                //   {suggestions.length > 0 && (
                 <ul className="absolute z-10 bg-white border mt-1 w-full max-h-60 overflow-y-auto shadow">
                   {suggestions.map((airport) => {
                     let distance = null;
@@ -117,7 +118,7 @@ export default function AirportForm() {
                         searchOrigin.lat,
                         searchOrigin.lon,
                         airport.lat,
-                        airport.lon
+                        airport.lon,
                       );
                     }
                     return (
@@ -129,7 +130,7 @@ export default function AirportForm() {
                           handleSelect(
                             field,
                             `${airport.city} - ${airport.iata}`,
-                            onChange
+                            onChange,
                           )
                         }
                         className="p-2 hover:bg-gray-100 cursor-pointer flex justify-between"

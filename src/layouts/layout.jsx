@@ -3,7 +3,7 @@ import { HeaderLarge } from "../components";
 export default function Layout({ children }) {
   return (
     <div>
-      <HeaderLarge/>
+      <HeaderLarge />
       <main className="">{children}</main>
     </div>
   );

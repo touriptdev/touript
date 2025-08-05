@@ -81,7 +81,6 @@ export default function ImageCrop({
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
   const hasAutoCropped = useRef(false);
 
-
   const onCropComplete = useCallback((_, croppedAreaPixels) => {
     setCroppedAreaPixels(croppedAreaPixels);
   }, []);
@@ -97,13 +96,12 @@ export default function ImageCrop({
       handleDone(); // Auto-crop!
     }
   }, [croppedAreaPixels, autoCrop]);
-  
 
   const handleDone = async () => {
     const { file, previewUrl } = await getCroppedImg(
       imageSrc,
       croppedAreaPixels,
-      options
+      options,
     );
     onComplete(previewUrl, file);
   };
@@ -115,7 +113,7 @@ export default function ImageCrop({
           className={clsx(
             "bg-white w-full",
             cropHeight === 264 ? "h-66" : "h-109",
-            "relative rounded-t-lg overflow-hidden"
+            "relative rounded-t-lg overflow-hidden",
           )}
         >
           <Cropper

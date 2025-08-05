@@ -84,15 +84,12 @@ export default function FarFable() {
       </section>
 
       <section className="hidden sm:flex items-center justify-center w-full sticky top-0 z-10 bg-gray-50">
-
-          <LargeScreenSearchNav />
-
+        <LargeScreenSearchNav />
       </section>
 
       <main className="flex items-center justify-center w-full py-8 gap-8 bg-white">
         <div className="flex flex-col items-center justify-center">
           <Post />
-          
         </div>
         <aside className="hidden sm:flex items-center justify-center w-sm gap-4 font-medium">
           Side Bar

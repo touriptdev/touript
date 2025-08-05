@@ -14,7 +14,12 @@ function IconButton({
       <div
         className={`w-${buttonSize} h-${buttonSize} ${bgColor} rounded-full flex items-center justify-center w-12 h-12`}
       >
-        <HugeiconsIcon icon={iconName} size={iconSize} className={iconColor} strokeWidth={2}/>
+        <HugeiconsIcon
+          icon={iconName}
+          size={iconSize}
+          className={iconColor}
+          strokeWidth={2}
+        />
       </div>
     </Link>
   );

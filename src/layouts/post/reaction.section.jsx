@@ -43,7 +43,7 @@ export default function ReactionSection({ value, onChange, reactionOptions }) {
             size={24}
             strokeWidth={2}
             className={clsx(
-              selectedReaction ? `${selectedReaction.color}` : "text-gray-900"
+              selectedReaction ? `${selectedReaction.color}` : "text-gray-900",
             )}
           />
         ) : (
@@ -55,7 +55,7 @@ export default function ReactionSection({ value, onChange, reactionOptions }) {
         )}
         <span
           className={clsx(
-            selectedReaction ? `${selectedReaction.color}` : "text-gray-900"
+            selectedReaction ? `${selectedReaction.color}` : "text-gray-900",
           )}
         >
           {selectedReaction ? selectedReaction.label : "Like"}
@@ -73,19 +73,26 @@ export default function ReactionSection({ value, onChange, reactionOptions }) {
             >
               <div
                 className={clsx(
-                  "flex items-center justify-center w-11 h-11 rounded-full  hover:bg-white hover:shadow-md transition-all duration-300",
+                  //   "flex items-center justify-center w-11 h-11 rounded-full border border-gray-100  hover:bg-white hover:shadow-lg transition-all duration-300 hover:animate-shake",
+                  "flex items-center justify-center w-11 h-11 rounded-full border border-gray-100  bg-gray-50 hover:bg-white hover:shadow-lg transition-all duration-300 cursor-pointer",
+                  "animate-shake",
                   reaction.color === "text-emerald-600" &&
-                    "hover:text-emerald-600",
-                  reaction.color === "text-teal-600" && "hover:text-teal-600",
-                  reaction.color === "text-pink-600" && "hover:text-pink-600",
-                  reaction.color === "text-blue-600" && "hover:text-blue-600",
+                    "hover:text-emerald-600 hover:border-emerald-600",
+                  reaction.color === "text-teal-600" &&
+                    "hover:text-teal-600 hover:border-teal-600",
+                  reaction.color === "text-pink-600" &&
+                    "hover:text-pink-600 hover:border-pink-600",
+                  reaction.color === "text-blue-600" &&
+                    "hover:text-blue-600 hover:border-blue-600",
                   reaction.color === "text-purple-600" &&
-                    "hover:text-purple-600",
-                  reaction.color === "text-red-600" && "hover:text-red-600"
+                    "hover:text-purple-600 hover:border-purple-600",
+                  reaction.color === "text-red-600" &&
+                    "hover:text-red-600 hover:border-red-600",
                 )}
               >
                 <HugeiconsIcon icon={reaction.icon} size={28} strokeWidth={2} />
               </div>
+
               <span className="text-xs font-poppins font-medium text-gray-400 capitalize">
                 {reaction.value}
               </span>

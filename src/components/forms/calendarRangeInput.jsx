@@ -329,7 +329,7 @@ export default function CalendarRangeInput() {
               <div className="mt-2 pt-2 border-t border-gray-200">
                 <span className="font-medium">Duration:</span>{" "}
                 {Math.ceil(
-                  (returnDate - departureDate) / (1000 * 60 * 60 * 24)
+                  (returnDate - departureDate) / (1000 * 60 * 60 * 24),
                 )}{" "}
                 days
               </div>
