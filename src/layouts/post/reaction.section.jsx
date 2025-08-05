@@ -32,7 +32,7 @@ export default function ReactionSection({ value, onChange, reactionOptions }) {
     <main className="relative inline-block">
       {/* Main button */}
       <div
-        className="flex items-center gap-2 cursor-pointer select-none h-14 w-44 border-b-2 border-transparent hover:border-gray-900"
+        className="flex items-center gap-2 cursor-pointer select-none h-14 w-44 border-b-2 border-transparent hover:border-gray-900 transition-all duration-300"
         onMouseDown={handleMouseDown}
         onMouseUp={handleMouseUp}
         onMouseLeave={() => clearTimeout(timerRef.current)}
