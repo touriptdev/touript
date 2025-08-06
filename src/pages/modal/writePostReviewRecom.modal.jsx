@@ -69,7 +69,8 @@ export default function WritePostReviewRecom({ onClose }) {
       menuLeft,
     });
 
-    setActive(active === idx ? null : idx);
+    // setActive(active === idx ? null : idx);
+    setActive(idx);
   };
   return (
     <div className="w-full font-poppins">

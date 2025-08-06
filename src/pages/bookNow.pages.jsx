@@ -298,6 +298,7 @@ export default function BookNow() {
   const tabRefs = useRef([]);
   const menuRefs = useRef([]);
   const [openModal, setOpenModal] = useState(null);
+  // const [isFirstOpen, setIsFirstOpen] = useState(true);
 
   const toggleModal = (modalType) => {
     setOpenModal((prev) => (prev === modalType ? null : modalType));
@@ -323,11 +324,22 @@ export default function BookNow() {
     const el = menuRefs.current[active];
     if (!el) return;
 
+    // const measure = () => {
+    //   const h = el.offsetHeight;
+    //   setPopoverHeight(h);
+    // };
+
+    // measure();
+
     const observer = new ResizeObserver(() =>
       setPopoverHeight(el.offsetHeight),
     );
     observer.observe(el);
     setPopoverHeight(el.offsetHeight); // Set initial height
+
+    // if (isFirstOpen) {
+    //   setIsFirstOpen(false);
+    // }
 
     return () => observer.disconnect();
   }, [active]);
@@ -352,16 +364,20 @@ export default function BookNow() {
       menuLeft,
       menuWidth,
     });
+    // const menuEl = menuRefs.current[idx];
+    // if (menuEl) {
+    //   setPopoverHeight(menuEl.offsetHeight);
+    // }
 
     setActive(active === idx ? null : idx);
   };
 
   return (
     <div>
-      <div className="flex items-center justify-center ">
+      <div className="flex items-center justify-center">
         <div
           className={clsx(
-            "max-w-5xl  h-22 relative flex items-center justify-center px-1 py-1 rounded-lg border border-gray-100",
+            "relative flex h-22 max-w-5xl items-center justify-center rounded-lg border border-gray-100 px-1 py-1",
             active !== null
               ? "bg-gray-50 shadow-none"
               : "bg-white shadow-xl shadow-gray-200",
@@ -373,7 +389,7 @@ export default function BookNow() {
               onClick={() => handleTabClick(idx)}
               ref={(el) => (tabRefs.current[idx] = el)}
               className={clsx(
-                "z-1 px-4 h-full min-w-57 font-poppins relative flex items-center cursor-pointer rounded-lg hover:bg-gray-100",
+                "font-poppins relative z-1 flex h-full min-w-57 cursor-pointer items-center rounded-lg px-4 hover:bg-gray-100",
                 idx === 3 ? "pr-20" : "",
                 active === idx && "hover:bg-transparent",
               )}
@@ -386,10 +402,10 @@ export default function BookNow() {
                   className="text-gray-400"
                 />
                 <div className="flex flex-col items-start">
-                  <span className="font-semibold text-xs text-gray-700">
+                  <span className="text-xs font-semibold text-gray-700">
                     {tab.label}
                   </span>
-                  <div className="flex items-center gap-1 text-base text-gray-900 font-medium">
+                  <div className="flex items-center gap-1 text-base font-medium text-gray-900">
                     <span className="font-normal text-gray-700">
                       {tab.primaryText}
                     </span>
@@ -415,7 +431,13 @@ export default function BookNow() {
           {/* Highlight background */}
           {active !== null && (
             <div
-              className="absolute h-20 bg-white rounded-lg shadow-xl shadow-gray-200 transition-all duration-300 z-0"
+              // className="absolute z-0 h-20 rounded-lg bg-white shadow-xl shadow-gray-200 transition-all duration-300"
+              className={clsx(
+                "absolute z-0 h-20 rounded-lg bg-white shadow-xl shadow-gray-200 transition-all duration-300", // smooth morph for movement
+                popoverHeight === 0
+                  ? "scale-50 opacity-0"
+                  : "scale-100 opacity-100", // pop-in only
+              )}
               style={{
                 left: `${hoverRect.highlightLeft}px`,
                 width: `${hoverRect.highlightWidth}px`,
@@ -426,14 +448,15 @@ export default function BookNow() {
           {/* Popover Menu */}
           {active !== null && (
             <div
-              className="popover-content absolute top-20 pt-6 max-w-xl duration-300"
+              // className="popover-content absolute top-20 max-w-xl pt-6 duration-300 transition-all duration-300"
+              className={`popover-content absolute top-20 max-w-xl pt-6 transition-all duration-300 ${popoverHeight === 0 ? "scale-50 opacity-0" : "scale-100 opacity-100"}`}
               style={{ left: hoverRect.menuLeft }}
             >
               <div
-                className="bg-white rounded-lg shadow-2xl shadow-gray-300 transition-all duration-300"
+                className="rounded-lg bg-white shadow-2xl shadow-gray-200 transition-all duration-300"
                 style={{
                   width: hoverRect.menuWidth,
-                  height: popoverHeight || 0,
+                  height: popoverHeight || "auto",
                 }}
               >
                 <SlideWrapper index={0} active={active}>
@@ -454,7 +477,7 @@ export default function BookNow() {
 
           {/* Search Button */}
           <button className="absolute right-4 z-10 cursor-pointer">
-            <div className="bg-emerald-500 rounded-full w-12 h-12 flex items-center justify-center">
+            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-emerald-500">
               <HugeiconsIcon
                 icon={Search01Icon}
                 size={24}
@@ -466,7 +489,7 @@ export default function BookNow() {
         </div>
       </div>
 
-      <div className="flex items-center gap-8 cursor-pointer">
+      <div className="flex cursor-pointer items-center gap-8">
         <button onClick={() => toggleModal("edit")}>Edit Profile</button>
         <button onClick={() => toggleModal("write")}>Write</button>
       </div>

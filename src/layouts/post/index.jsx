@@ -28,7 +28,7 @@ export default function Post({
   memberUsername = "@memberusername",
   postTime = "2:45PM",
   postTitle = "Hidden Paradise in Bali – Nusa Penida Travel Experience",
-  postType = "recommendation",
+  postType = "review",
   postDescription = "Hey fellow travelers! ✈️ I just got back from Nusa Penida, a breathtaking island off the coast of Bali, and I had to share my experience! 🏖️ . We rented a scooter from the harbor and explored Kelingking Beach, Broken Beach, and Angel’s Billabong. The cliffs are insane, and the views are straight out of a postcard. The roads are a bit rough, so be prepared for a bumpy ride 😅 — but totally worth it!",
   departureDate = "Jul 26, 25",
   arrivalDate = "Aug 6, 25",
@@ -40,10 +40,25 @@ export default function Post({
   cityOneAirport = "DXB",
   flightType = "multi",
   departureAirline = "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Qatar_Airways_logo.svg/2560px-Qatar_Airways_logo.svg.png",
-  diffrentAirline = false,
+  diffrentAirline = true,
   arrivalAirline = "https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Turkish_Airlines_logo_2019_compact.svg/2560px-Turkish_Airlines_logo_2019_compact.svg.png",
   cityOneAirline = "https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Turkish_Airlines_logo_2019_compact.svg/2560px-Turkish_Airlines_logo_2019_compact.svg.png",
+  mediaFiles = [
+    {
+      url: "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?q=80&w=2370&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      type: "image/jpeg",
+    },
+    {
+      url: "https://images.unsplash.com/photo-1472586662442-3eec04b9dbda?q=80&w=2374&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      type: "image/jpeg",
+    },
+    {
+      url: "https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?q=80&w=2370&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      type: "image/jpeg",
+    },
+  ],
   // postReactions = [],
+
   // postComments = [],
   // postShare = "",
 }) {
@@ -143,11 +158,69 @@ export default function Post({
 
       <main className="flex w-full flex-col items-start justify-center gap-4">
         {postType === "text" && (
-          <div className="font-poppins my-4 flex w-full flex-col items-start justify-center gap-4 text-gray-900">
-            <h5 className="w-full text-lg font-semibold">{postTitle}</h5>
-            <span className="w-full text-sm/7 text-gray-700">
-              {postDescription}
-            </span>
+          <div className="flex flex-col items-center w-full">
+            <div className="font-poppins my-4 flex w-full flex-col items-start justify-center gap-4 text-gray-900">
+              <h5 className="w-full text-lg font-semibold">{postTitle}</h5>
+              <span className="w-full text-sm/7 text-gray-700">
+                {postDescription}
+              </span>
+            </div>
+
+            {/* {mediaFiles && (
+              <div className="grid w-full grid-cols-3 gap-3 rounded-lg">
+
+                {mediaFiles[0] && (
+                  <div className="col-span-2 aspect-square h-full w-full">
+                    <img
+                      src={mediaFiles[0].url}
+                      alt="Community image"
+                      className="h-full w-full rounded-lg bg-gray-200 object-cover"
+                    />
+                  </div>
+                )}
+
+
+                <div className="grid grid-rows-2 gap-3">
+                  {mediaFiles.slice(1, 3).map((file, id) => (
+                    <div key={id} className="h-full w-full aspect-square">
+                      <img
+                        src={file.url}
+                        alt="Community image"
+                        className="h-full w-full rounded-lg bg-gray-200 object-cover"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )} */}
+
+            {mediaFiles && (
+              <div className="flex w-full gap-3 rounded-lg">
+                {/* Left big image */}
+                {mediaFiles[0] && (
+                  <div className="aspect-square flex-[2]">
+                    <img
+                      src={mediaFiles[0].url}
+                      alt="Community image"
+                      className="h-full w-full rounded-lg bg-gray-200 object-cover"
+                    />
+                  </div>
+                )}
+
+                {/* Right two stacked images */}
+                <div className="flex flex-1 flex-col gap-3">
+                  {mediaFiles.slice(1, 3).map((file, id) => (
+                    <div key={id} className="aspect-square flex-1">
+                      <img
+                        src={file.url}
+                        alt="Community image"
+                        className="h-full w-full rounded-lg bg-gray-200 object-cover"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         )}
 
@@ -263,8 +336,8 @@ export default function Post({
           </div>
         )}
 
-        <div className="font-poppins flex h-14 w-full items-center justify-between font-medium text-gray-900 border-b border-gray-200">
-          <div className="flex h-14 flex-col items-center justify-start gap-2 sm:flex-row ">
+        <div className="font-poppins flex h-14 w-full items-center justify-between border-b border-gray-200 font-medium text-gray-900">
+          <div className="flex h-14 flex-col items-center justify-start gap-2 sm:flex-row">
             <ReactionSection
               value={reaction}
               onChange={(e) => setReaction(e)}
@@ -272,7 +345,7 @@ export default function Post({
             />
           </div>
 
-          <div className="flex h-14 flex-col items-center justify-start gap-2 px-4 sm:flex-row ">
+          <div className="flex h-14 flex-col items-center justify-start gap-2 px-4 sm:flex-row">
             <HugeiconsIcon
               icon={MoreVerticalCircle01Icon}
               size={24}

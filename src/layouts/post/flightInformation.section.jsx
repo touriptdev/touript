@@ -19,7 +19,7 @@ export default function FlightInformation({
   diffrentAirline = false,
 }) {
   return (
-    <div className="flex w-full items-center justify-center border-2 hover:border-gray-900">
+    <div className="flex w-full items-center justify-center ">
       {/* Departure Information */}
       <div className="font-poppins flex w-full flex-1 items-center justify-start gap-2 font-medium whitespace-nowrap text-gray-900">
         <HugeiconsIcon
@@ -29,7 +29,7 @@ export default function FlightInformation({
           className="text-gray-400"
         />
         {departureDate && (
-          <span className="text-gray-400">{departureDate}</span>
+          <span className="text-gray-500">{departureDate}</span>
         )}
         {departureAirport && <span>{departureAirport}</span>}
       </div>
@@ -61,7 +61,7 @@ export default function FlightInformation({
       {/* Arrival Information */}
       <div className="font-poppins flex w-full flex-1 items-center justify-end gap-2 font-medium whitespace-nowrap text-gray-900">
         {arrivalAirport && <span>{arrivalAirport}</span>}
-        {arrivalDate && <span className="text-gray-400">{arrivalDate}</span>}
+        {arrivalDate && <span className="text-gray-500">{arrivalDate}</span>}
         <HugeiconsIcon
           icon={arrivalIcon}
           size={24}

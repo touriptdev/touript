@@ -2,7 +2,7 @@ import React, { forwardRef } from "react";
 
 const Menu2 = forwardRef((props, ref) => {
   return (
-    <div ref={ref} className="px-16 py-8 flex flex-col gap-4 bg-white">
+    <div ref={ref} className="px-16 py-8 flex flex-col gap-4 ">
       <span className="text-xl">Where to do</span>
       <div className="flex items-center justify-between gap-8">
         <div>
