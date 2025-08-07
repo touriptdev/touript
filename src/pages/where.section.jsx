@@ -20,14 +20,15 @@ const coachOptions = [
   { value: "first", label: "First Class" },
 ];
 
-const Menu1 = forwardRef((props, ref) => {
+const Where = forwardRef((props, ref) => {
   const [route, setRoute] = useState(null);
   const [coach, setCoach] = useState(null);
   // const [isRouteSelected, setIsRouteSelected] = useState(false);
+
   return (
     <div
       ref={ref}
-      className="font-poppins flex flex-col gap-2 px-8 py-4 font-medium"
+      className={`font-poppins flex flex-col gap-2 px-8 py-8 font-medium`}
     >
       {/* Header */}
       <div className="font-poppins flex w-full flex-col items-center justify-start gap-1 border-b border-gray-200 pb-4 text-gray-900">
@@ -74,4 +75,4 @@ const Menu1 = forwardRef((props, ref) => {
   );
 });
 
-export default Menu1;
+export default Where;

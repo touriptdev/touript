@@ -15,3 +15,4 @@ export { default as PrivacyDropdownSelect } from "./privacyDropDown";
 export { default as TextAreaInput } from "./textAreaInput";
 export { default as PhoneNumberInput } from "./phoneNumberInput";
 export { default as RadioInput } from "./radioInput";
+export { default as CounterInput } from "./counterInput";

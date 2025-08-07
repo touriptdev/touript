@@ -170,7 +170,7 @@ export default function CalendarSingleInput({
       <div className="relative" ref={calendarRef}>
         {/* <div className="relative w-full" ref={calendarRef}> */}
         <div className="relative w-full">
-          <div className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-900">
+          <div className="absolute top-1/2 left-4 -translate-y-1/2 text-gray-900">
             <HugeiconsIcon icon={Calendar03Icon} size={24} strokeWidth={2} />
           </div>
 
@@ -202,14 +202,14 @@ export default function CalendarSingleInput({
                 }
               }
             }}
-            className="w-full h-14 px-14 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 transition-all duration-300 delay-100"
+            className="h-14 w-full rounded-lg border border-gray-200 px-14 transition-all delay-100 duration-300 focus:ring-2 focus:ring-gray-900 focus:outline-none"
           />
           {/* {selectedDate && ( */}
           {value && (
             <button
               type="button"
               onClick={handleClear}
-              className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-900 cursor-pointer"
+              className="absolute top-1/2 right-4 -translate-y-1/2 cursor-pointer text-gray-400 hover:text-gray-900"
             >
               <HugeiconsIcon
                 icon={CancelCircleIcon}
@@ -222,12 +222,12 @@ export default function CalendarSingleInput({
         </div>
 
         {isOpen && (
-          <div className="absolute z-10 mt-2 bg-white shadow-lg rounded-lg border border-gray-200 px-4 py-4 sm:px-8 sm:py-8 w-full">
-            <div className="flex items-center justify-between mb-4">
+          <div className="absolute z-10 mt-2 w-full rounded-lg border border-gray-200 bg-white px-4 py-4 shadow-lg sm:px-8 sm:py-8">
+            <div className="mb-4 flex items-center justify-between">
               <button
                 type="button"
                 onClick={() => navigateMonth(-1)}
-                className="h-11 w-11 flex items-center justify-center rounded-full text-gray-400 hover:text-gray-900 hover:bg-gray-100 transition-colors duration-300 delay-150 cursor-pointer"
+                className="flex h-11 w-11 cursor-pointer items-center justify-center rounded-full text-gray-400 transition-colors delay-150 duration-300 hover:bg-gray-100 hover:text-gray-900"
               >
                 <HugeiconsIcon
                   icon={CircleArrowLeft01Icon}
@@ -243,7 +243,7 @@ export default function CalendarSingleInput({
               <button
                 type="button"
                 onClick={() => navigateMonth(1)}
-                className="h-11 w-11 flex items-center justify-center text-gray-400 hover:text-gray-900 rounded-full hover:bg-gray-100 transition-colors duration-300 delay-150 cursor-pointer"
+                className="flex h-11 w-11 cursor-pointer items-center justify-center rounded-full text-gray-400 transition-colors delay-150 duration-300 hover:bg-gray-100 hover:text-gray-900"
               >
                 <HugeiconsIcon
                   icon={CircleArrowRight01Icon}
@@ -256,11 +256,11 @@ export default function CalendarSingleInput({
             {/* Today button */}
             {(currentMonth.getMonth() !== today.getMonth() ||
               currentMonth.getFullYear() !== today.getFullYear()) && (
-              <div className="flex justify-center mb-2">
+              <div className="mb-2 flex justify-center">
                 <button
                   type="button"
                   onClick={goToToday}
-                  className="text-sm text-gray-400 hover:text-gray-900 font-medium cursor-pointer transition-colors duration-300 delay-150"
+                  className="cursor-pointer text-sm font-medium text-gray-400 transition-colors delay-150 duration-300 hover:text-gray-900"
                 >
                   Go to Today
                 </button>
@@ -269,11 +269,11 @@ export default function CalendarSingleInput({
 
             {/* Calendar grid */}
             <div className="sm:px-11">
-              <div className="grid grid-cols-7 gap-1 mb-2">
+              <div className="mb-2 grid grid-cols-7 gap-1">
                 {["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"].map((day) => (
                   <div
                     key={day}
-                    className="h-11 flex items-center justify-center text-xs sm:text-sm font-medium text-gray-400"
+                    className="flex h-11 items-center justify-center text-xs font-medium text-gray-400 sm:text-sm"
                   >
                     {day}
                   </div>
@@ -284,7 +284,7 @@ export default function CalendarSingleInput({
                 {days.map((date, index) => (
                   <div
                     key={index}
-                    className="relative h-11 flex items-center justify-center font-medium"
+                    className="relative flex h-11 items-center justify-center font-medium"
                   >
                     {date && (
                       <button
@@ -296,7 +296,7 @@ export default function CalendarSingleInput({
                         {date.getDate()}
                         {/* {isToday(date) && !isSameDay(date, selectedDate) && ( */}
                         {isToday(date) && !isSameDay(date, value) && (
-                          <div className="absolute bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-emerald-500 rounded-full"></div>
+                          <div className="absolute bottom-1 left-1/2 h-1 w-1 -translate-x-1/2 transform rounded-full bg-emerald-500"></div>
                         )}
                       </button>
                     )}
@@ -311,7 +311,7 @@ export default function CalendarSingleInput({
       {/* Quick date options */}
       {quickDate && (
         <div className="mt-2">
-          <div className="flex gap-4 items-center overflow-x-auto h-14 px-4 py-1">
+          <div className="flex h-14 items-center gap-4 overflow-x-auto px-4 py-1">
             {["Today", "Yesterday", "Last Week", "Last Month"].map((label) => (
               <button
                 key={label}
@@ -326,7 +326,7 @@ export default function CalendarSingleInput({
                   if (onChange) onChange(date);
                   setIsOpen(false);
                 }}
-                className="w-full px-4 h-11 text-sm font-medium bg-gray-50 text-gray-900 rounded-lg border border-gray-200 hover:ring-2 hover:ring-gray-900 hover:bg-white transition-all transition-colors duration-300 delay-150 cursor-pointer"
+                className="h-11 w-full cursor-pointer rounded-lg border border-gray-200 bg-gray-50 px-4 text-sm font-medium text-gray-900 transition-all transition-colors delay-150 duration-300 hover:bg-white hover:ring-2 hover:ring-gray-900"
               >
                 <span className="whitespace-nowrap">{label}</span>
               </button>
