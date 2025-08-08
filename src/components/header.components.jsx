@@ -55,80 +55,80 @@ function HeaderLarge() {
 
   return (
     <div>
-      <div className="hidden lg:flex items-center justify-between bg-gray-50 relative px-8 py-4 ">
-        {/* Logo */}
-        <Link
-          to="/"
-          className="font-poppins font-medium text-gray-900 text-2xl"
-        >
-          <span className="">touript</span>
-        </Link>
-
-        {/* Nav Bar */}
-
-        <div className="absolute flex items-center gap-8  left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 font-poppins text-base font-medium text-gray-700 h-14">
-          {/* Animated Underline */}
-          <div
-            className="absolute bottom-0 h-0.5 bg-emerald-500 transition-all duration-300 ease-in-out"
-            style={{ ...indicatorStyle }}
-          />
-
-          {navItems.map((item, idx) => (
-            <div
-              key={item.link}
-              ref={(el) => {
-                if (el) desktopNavRefs.current[idx] = el;
-              }}
-              className="relative"
-            >
-              <ButtonWithBorder
-                iconText={item.text}
-                iconName={item.icon}
-                iconLink={item.link}
-                useNavLink={true}
-              />
-            </div>
-          ))}
-        </div>
-
-        <div className="flex items-center justify-end gap-4 font-poppins text-base font-medium text-gray-700 h-14">
-          {/* Create Account [Sign Up] */}
-
-          <button
-            onClick={() =>
-              navigate("/signup", {
-                state: { backgroundLocation: location },
-              })
-            }
-            className="flex items-center text-sm h-full py-4 px-4 rounded-lg border-1 border-gray-200 bg-gray-50 font-medium font-poppins text-gray-500 hover:text-emerald-500 hover:border-transparent cursor-pointer hover:bg-white hover:shadow-xl hover:shadow-gray-200 transition-all duration-300 delay-150"
+      {/* <div className="hidden lg:flex items-center justify-between bg-gray-50 relative px-8 py-4 "> */}
+      <div className="absolute top-0 z-10 w-full">
+        <div className="hidden w-full items-center justify-between px-8 py-4 lg:flex">
+          {/* Logo */}
+          <Link
+            to="/"
+            className="font-poppins text-2xl font-medium text-gray-900"
           >
-            <span>Create Account</span>
-          </button>
-
-          {/* Person Image Area [Login]*/}
-          <button
-            className="w-14 h-14 bg-transparent border-2 border-gray-200 rounded-full flex items-center justify-center cursor-pointer"
-            onClick={() =>
-              navigate("/signin", {
-                state: { backgroundLocation: location },
-              })
-            }
-          >
+            <span className="">touript</span>
+          </Link>
+          {/* Nav Bar */}
+          <div className="font-poppins absolute top-1/2 left-1/2 flex h-14 -translate-x-1/2 -translate-y-1/2 items-center gap-8 text-base font-medium text-gray-700">
+            {/* Animated Underline */}
             <div
-              className={`w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center w-12 h-12`}
+              className="absolute bottom-0 h-0.5 bg-emerald-500 transition-all duration-300 ease-in-out"
+              style={{ ...indicatorStyle }}
+            />
+
+            {navItems.map((item, idx) => (
+              <div
+                key={item.link}
+                ref={(el) => {
+                  if (el) desktopNavRefs.current[idx] = el;
+                }}
+                className="relative"
+              >
+                <ButtonWithBorder
+                  iconText={item.text}
+                  iconName={item.icon}
+                  iconLink={item.link}
+                  useNavLink={true}
+                />
+              </div>
+            ))}
+          </div>
+          <div className="font-poppins flex h-14 items-center justify-end gap-4 text-base font-medium text-gray-700">
+            {/* Create Account [Sign Up] */}
+
+            <button
+              onClick={() =>
+                navigate("/signup", {
+                  state: { backgroundLocation: location },
+                })
+              }
+              className="font-poppins flex h-full cursor-pointer items-center rounded-lg border-1 border-gray-200 bg-gray-50 px-4 py-4 text-sm font-medium text-gray-500 transition-all delay-150 duration-300 hover:border-transparent hover:bg-white hover:text-emerald-500 hover:shadow-xl hover:shadow-gray-200"
             >
-              <HugeiconsIcon
-                icon={User02Icon}
-                size={24}
-                className="text-gray-700"
-                strokeWidth={2}
-              />
-            </div>
-          </button>
+              <span>Create Account</span>
+            </button>
+
+            {/* Person Image Area [Login]*/}
+            <button
+              className="flex h-14 w-14 cursor-pointer items-center justify-center rounded-full border-2 border-gray-200 bg-transparent"
+              onClick={() =>
+                navigate("/signin", {
+                  state: { backgroundLocation: location },
+                })
+              }
+            >
+              <div
+                className={`flex h-12 w-12 items-center justify-center rounded-full bg-gray-200`}
+              >
+                <HugeiconsIcon
+                  icon={User02Icon}
+                  size={24}
+                  className="text-gray-700"
+                  strokeWidth={2}
+                />
+              </div>
+            </button>
+          </div>
         </div>
       </div>
 
-      <div className="fixed bottom-0 flex items-center justify-evenly w-full min-w-sm shadow-[0_-1px_0px_rgba(0,0,0,0.05)] bg-white z-100 lg:hidden ">
+      <div className="fixed bottom-0 z-100 flex w-full min-w-sm items-center justify-evenly bg-white shadow-[0_-1px_0px_rgba(0,0,0,0.05)] lg:hidden">
         {/* Mobile Animated Indicator */}
         <div
           className="absolute top-0 h-0.5 bg-emerald-500 transition-all duration-300 ease-in-out"

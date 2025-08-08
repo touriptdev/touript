@@ -16,16 +16,16 @@ export default function ResponsiveModal({ children, onClose }) {
   };
 
   return (
-    <div className="fixed inset-0 z-10 bg-gray-500/50 backdrop-blur-xs flex justify-center items-center">
+    <div className="fixed inset-0 z-100 flex items-center justify-center bg-gray-500/50 backdrop-blur-xs">
       {/* Backdrop click area */}
       <div className="absolute inset-0" onClick={close} />
 
       {isMobile ? (
         // Bottom Sheet Modal (Mobile)
-        <div className="absolute bottom-16 left-0 right-0 mx-auto w-full min-w-sm max-h-[84vh] rounded-t-2xl bg-white  pb-8 px-8 animate-slideUp overflow-y-auto no-scrollbar sm:hidden">
+        <div className="animate-slideUp no-scrollbar absolute right-0 bottom-16 left-0 mx-auto max-h-[84vh] w-full min-w-sm overflow-y-auto rounded-t-2xl bg-white px-8 pb-8 sm:hidden">
           {/* <div className="mb-2 h-1 w-9 bg-gray-200 rounded-full mx-auto" /> */}
-          <div className="sticky top-0 z-10 bg-white h-8 w-full flex items-center justify-center">
-            <div className="h-1 w-9 bg-gray-200 rounded-full mx-auto" />
+          <div className="sticky top-0 z-10 flex h-8 w-full items-center justify-center bg-white">
+            <div className="mx-auto h-1 w-9 rounded-full bg-gray-200" />
           </div>
           {children}
         </div>
@@ -34,6 +34,8 @@ export default function ResponsiveModal({ children, onClose }) {
         <div className="absolute top-22 left-1/2 -translate-x-1/2 w-full max-w-3xl max-h-[calc(100vh-88px-32px)] overflow-y-auto bg-white rounded-lg shadow-2xl px-16 py-8 animate-fadeIn no-scrollbar hidden sm:block">
           {children}
         </div>
+
+        
       )}
     </div>
   );

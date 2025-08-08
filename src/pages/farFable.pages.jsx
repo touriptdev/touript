@@ -22,11 +22,11 @@ export default function FarFable() {
 
   return (
     <section className="bg-gray-50">
-      <section className="sticky top-0 z-10 font-poppins w-full bg-gray-50 px-6 sm:hidden">
-        <div className="flex flex-col sm:flex-row items-center justify-center w-full">
+      <section className="font-poppins sticky top-0 z-10 w-full bg-gray-50 px-6 sm:hidden">
+        <div className="flex w-full flex-col items-center justify-center sm:flex-row">
           {/* Search bar */}
 
-          <div className=" flex items-center justify-center w-full min-w-sm sm:w-2xl gap-4 py-8 bg-gray-50">
+          <div className="flex w-full min-w-sm items-center justify-center gap-4 bg-gray-50 py-8 sm:w-2xl">
             <SearchSelect
               label="search"
               labelIcon={Search01Icon}
@@ -37,7 +37,7 @@ export default function FarFable() {
 
             <button
               type="button"
-              className="flex items-center justify-center px-4 w-14 h-14 text-gray-900 bg-gray-100 border border-gray-200 rounded-lg hover:bg-emerald-500 hover:shadow-lg ghover:shadow-gray-200 transition-all duration-300 delay-150 sm:hidden"
+              className="ghover:shadow-gray-200 flex h-14 w-14 items-center justify-center rounded-lg border border-gray-200 bg-gray-100 px-4 text-gray-900 transition-all delay-150 duration-300 hover:bg-emerald-500 hover:shadow-lg sm:hidden"
             >
               <HugeiconsIcon
                 icon={DashboardSquare01Icon}
@@ -52,11 +52,11 @@ export default function FarFable() {
           <div
             role="toolbar"
             aria-label="Flight actions"
-            className="flex items-center justify-end w-full min-w-sm sm:w-sm gap-4 font-medium pb-8"
+            className="flex w-full min-w-sm items-center justify-end gap-4 pb-8 font-medium sm:w-sm"
           >
             <button
               type="button"
-              className="flex items-center justify-center gap-2 w-full whitespace-nowrap h-14 text-gray-900 bg-gray-100 border border-gray-200 rounded-lg cursor-pointer hover:border-white hover:bg-white hover:shadow-lg hover:shadow-gray-200 transition-all duration-300 delay-150"
+              className="flex h-14 w-full cursor-pointer items-center justify-center gap-2 rounded-lg border border-gray-200 bg-gray-100 whitespace-nowrap text-gray-900 transition-all delay-150 duration-300 hover:border-white hover:bg-white hover:shadow-lg hover:shadow-gray-200"
             >
               <HugeiconsIcon
                 icon={HonourStarIcon}
@@ -69,7 +69,7 @@ export default function FarFable() {
 
             <button
               type="button"
-              className="flex items-center justify-center gap-2 w-full whitespace-nowrap h-14 text-white bg-emerald-600  rounded-lg cursor-pointer hover:bg-emerald-500  hover:shadow-lg ghover:shadow-gray-200 transition-all duration-300 delay-150"
+              className="ghover:shadow-gray-200 flex h-14 w-full cursor-pointer items-center justify-center gap-2 rounded-lg bg-emerald-600 whitespace-nowrap text-white transition-all delay-150 duration-300 hover:bg-emerald-500 hover:shadow-lg"
             >
               <HugeiconsIcon
                 icon={PropertyAddIcon}
@@ -83,18 +83,46 @@ export default function FarFable() {
         </div>
       </section>
 
-      <section className="hidden sm:flex items-center justify-center w-full sticky top-0 z-10 bg-gray-50">
+      <section className="sticky top-0 z-10 hidden w-full items-center justify-center bg-gray-50 sm:flex">
         <LargeScreenSearchNav />
       </section>
 
-      <main className="flex items-center justify-center w-full py-8 gap-8 bg-white">
+      <main className="flex w-full items-center justify-center gap-8 bg-white py-8">
         <div className="flex flex-col items-center justify-center">
           <Post />
         </div>
-        <aside className="hidden sm:flex items-center justify-center w-sm gap-4 font-medium">
+        <aside className="hidden w-sm items-center justify-center gap-4 font-medium sm:flex">
           Side Bar
         </aside>
       </main>
     </section>
   );
+}
+
+{
+  /* 
+
+  const [openModal, setOpenModal] = useState(null);
+  
+    const toggleModal = (modalType) => {
+      setOpenModal((prev) => (prev === modalType ? null : modalType));
+    };
+  
+  
+  <div className="flex cursor-pointer items-center gap-8">
+        <button onClick={() => toggleModal("edit")}>Edit Profile</button>
+        <button onClick={() => toggleModal("write")}>Write</button>
+      </div>
+
+      {openModal === "edit" && (
+        <ResponsiveModal onClose={() => setOpenModal(null)}>
+          <EditProfile onClose={() => setOpenModal(null)} />
+        </ResponsiveModal>
+      )}
+
+      {openModal === "write" && (
+        <ResponsiveModal onClose={() => setOpenModal(null)}>
+          <WritePostReviewRecom onClose={() => setOpenModal(null)} />
+        </ResponsiveModal>
+      )} */
 }
